@@ -1,0 +1,16 @@
+<h2><%=t :forgot_password %></h2><br /><br />
+
+<%= bootstrap_horizontal_form_for(resource, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+
+    <div class="form-group">
+        <%= f.label :email, :col_sm => 2 %>
+        <%= f.text_field :email, :col_sm => 4 %>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <%= f.submit t(:send_password) %>
+        </div>
+    </div>
+
+<% end %>

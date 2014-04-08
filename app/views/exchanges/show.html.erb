@@ -1,0 +1,83 @@
+
+            <div class="well pull-left col-sm-4">
+                <% if is_owner(@exchange) %>
+                    <%= link_to edit_exchange_path(@exchange), :class => "btn btn-primary pull-right" do %><i class="fa fa-pencil"></i> <%= t(:edit) %><% end %>
+                    <%= link_to @exchange, method: :delete, :class => "btn btn-danger pull-right", data: { confirm: t(:delete_confirmation) }, :style => "margin-right: 5px;" do %><i class="fa fa-trash-o"></i> <%= t(:delete) %><% end %>
+                <% end %>
+                <h2 style="line-height: 24px;"><%= @exchange.title %></h2>
+
+                <% if @exchange.is_offer & @exchange.is_demand %>
+                  <span class="label label-warning"><%=t :is_offer %></span>   <span class="label label-info"><%=t :is_demand %></span>
+                <% elsif @exchange.is_offer %>
+                    <span class="label label-warning"><%=t :is_offer %></span>
+                <% else t :is_demand %>
+                    <span class="label label-info"><%=t :is_demand %></span>
+                <% end %><br /><br />
+
+                <div style="display: table;"><div style="display: table-row">
+                    <div style="display: table-cell; vertical-align: top; padding-right: 10px;">
+                        <%= link_to owner_link(@exchange) do %><%= image_tag owner_image(@exchange).url(:icon), :style => "border-radius: 3px; position: relative; top: 3px;" %><% end %>
+                    </div>
+                    <div style="display: table-cell; vertical-align: top;">
+                            <%= t :lbl_by %> <strong><%= link_to owner_name(@exchange), owner_link(@exchange), :class => "text-primary", :style => "text-decoration: none;" %></strong>
+                    </div>
+                </div></div><br />
+
+                <% if @exchange.picture.exists? %>
+                    <%= link_to @exchange.picture.url, :class => "pull-left", :style => "margin-right: 5px;" do %>
+                        <%= image_tag @exchange.picture.url(:thumb) %>
+                    <% end %>
+                <% end %>
+                <div style="display:block; word-wrap: break-word;">
+                    <%=raw @exchange.description %>
+                </div>
+                <div style="clear: both;">&nbsp;</div>
+
+                <div style="display:block;">
+                  <strong><%=t :category %></strong>
+                  <% if !@exchange.category.nil? %>
+                  <span class="label label-success">
+                    <%= @exchange.category.title %>
+                  </span>
+                  <% end %>
+                </div>
+
+                <strong><%=t :start %>:</strong>
+                <a href="#" data-toggle="tooltip" title="<%=l @exchange.start %>"><%= timeago_tag @exchange.start.to_time, :force => true %></a><br />
+
+                <strong><%=t :end %>:</strong>
+                <a href="#" data-toggle="tooltip" title="<%=l @exchange.end %>"><%= timeago_tag @exchange.end.to_time, :force => true %></a><br /><br />
+
+                <strong><%=t :creation_date %>:</strong>
+                <a href="#" data-toggle="tooltip" title="<%=l @exchange.created_at.to_date %>"><%= timeago_tag @exchange.created_at, :force => true %></a><br />
+
+                <strong><%=t :modification_date %>:</strong>
+                <a href="#" data-toggle="tooltip" title="<%=l @exchange.updated_at.to_date %>"><%= timeago_tag @exchange.updated_at, :force => true %></a>
+
+
+
+
+            </div>
+
+
+        <div class="col-sm-6" style="padding-left: 20px;">
+
+
+            <h2><%=t :proposals %></h2><br />
+
+            <%= render "proposals" %>
+
+          <% if @exchange.can_propose && !is_owner(@exchange) && @exchange.status_cd = 0 %>
+                <strong><%=t :new_proposal %></strong><br />
+                <%= bootstrap_horizontal_form_for [@exchange, @new_proposal] do |f| %>
+                    <div class="form-group" style="margin-bottom: 0; padding: 0 15px;">
+                        <%= f.text_area :description, :col_sm => nil, :placeholder => t(:description), :rows => 7 %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.check_box :is_visible, :label => t(:is_visible) %>
+                    </div>
+                    <%= f.submit t(:new_proposal_button), :class => "pull-right" %>
+                <% end %>
+            <% end %>
+
+        </div>

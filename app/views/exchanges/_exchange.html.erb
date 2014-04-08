@@ -1,0 +1,144 @@
+
+<div class="form-group">
+  <%= f.label :title, :col_sm => label_col %>
+  <%= f.text_field :title, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :quantity, :col_sm => label_col %>
+  <%= f.text_field :quantity, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :is_offer, :col_sm => label_col %>
+  <%= f.check_box :is_offer, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :is_demand, :col_sm => label_col %>
+  <%= f.check_box :is_demand, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :start, :col_sm => label_col %>
+  <%= f.text_field :start, 'data-behaviour' => 'datepicker', :style => "width: 40%" %>
+</div>
+<div class="form-group">
+  <%= f.label :end, :col_sm => label_col %>
+  <%= f.text_field :end, 'data-behaviour' => 'datepicker', :style => "width: 40%" %>
+</div>
+<div class="form-group">
+  <%= f.label :category_id, :col_sm => label_col %>
+  <%= f.collection_select :category_id, Category.all, :id, :title, {:selected => @exchange.category_id},{:class=>'form-control', :style=>'width:200px;'} %>
+</div>
+<div class="form-group">
+  <b><%=t (:lbl_location) %></b>
+  <!-- Google maps here -->
+  <div style="height:250px; border: 2px solid #202d3b;">
+    <div id="googlemap" style="width: 100%; height: 100%;" class="col-md-10"></div>
+    <input type="hidden" id="latitude" />
+    <input type="hidden" id="longitude" />
+    <div id="info"></div>
+  </div>
+
+  <%= f.text_field :latitude, :col_sm => 12, :disabled=>false, :id=>'lat', :style=>'display:none' %>
+  <%= f.text_field :longitude, :col_sm => 12, :disabled=>false, :id=>'lng', :style=>'display:none' %>
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8D1bN_eXbkhRdSTfribspY_zifkFGuww&sensor=false"></script>
+  <script type="text/javascript">
+       var map;
+       var markersArray = [];
+
+       function initialize() {
+           var lat = 50.852362;
+           var lng = 4.361626;
+           var mapOptions = {
+           center: new google.maps.LatLng(50.852362,4.361626),
+           zoom: 14,
+           mapTypeId: google.maps.MapTypeId.ROADMAP,
+           scrollwheel: false
+
+           };
+           map = new google.maps.Map(document.getElementById("googlemap"), mapOptions);
+
+           // load marker that has been selected
+           <% if action_name == "edit" and !@exchange.latitude.blank? and !@exchange.longitude %>
+            // create a marker at the location on the database
+           var location = new google.maps.LatLng(<%= @exchange.latitude %>,<%= @exchange.longitude %>);
+           var marker = new google.maps.Marker({
+               position: location,
+               map: map
+           });
+            // push it to array
+           markersArray.push(marker);
+
+            // center the map to the location
+           map.setCenter(location);
+           <% else %>
+            // start geolocation
+           // Try W3C Geolocation (Preferred)
+           if(navigator.geolocation) {
+               browserSupportFlag = true;
+               navigator.geolocation.getCurrentPosition(function(position) {
+                   initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                   map.setCenter(initialLocation);
+               }, function() {
+                   map.setCenter(new google.maps.LatLng(lat, lng));
+               });
+           }
+           else {
+               map.setCenter(new google.maps.LatLng(lat, lng));
+           }
+           <% end %>
+
+           // add a click event handler to the map object
+           google.maps.event.addListener(map, "click", function(event)
+           {
+               // place a marker
+               placeMarker(event.latLng);
+           });
+
+       }
+
+
+       function placeMarker(location) {
+           // first remove all markers if there are any
+           deleteOverlays();
+
+           var marker = new google.maps.Marker({
+               position: location,
+               map: map
+           });
+
+           $("#latitude").val(location.lat());
+           $("#longitude").val(location.lng());
+
+           $("#lat").attr("value",$("#latitude").val());
+           $("#lng").attr("value",$("#longitude").val());
+
+           // add marker in markers array
+           markersArray.push(marker);
+
+           //map.setCenter(location);
+       }
+
+       // Deletes all markers in the array by removing references to them
+       function deleteOverlays() {
+       if (markersArray) {
+       for (i in markersArray) {
+       markersArray[i].setMap(null);
+       }
+       markersArray.length = 0;
+       }
+       }
+
+       google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+</div>
+
+<div class="form-group">
+  <%= f.label t :descriptionform , :col_sm => label_col %>
+  <%= f.text_area :description, :col_sm => field_col, :rows => "8", :cols => "15", :id => "description", :style=>"min-width:390px;" %>
+</div>
+<div class="form-group">
+  <%= f.label :picture, :col_sm => label_col %>
+  <%= f.file_field :picture, :title => t(:browse), :class => "btn-primary" %>
+</div>
+

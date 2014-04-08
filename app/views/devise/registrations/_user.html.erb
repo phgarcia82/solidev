@@ -1,0 +1,57 @@
+<div class="form-group">
+    <%= f.label :first_name, :col_sm => label_col %>
+    <%= f.text_field :first_name, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :last_name, :col_sm => label_col %>
+    <%= f.text_field :last_name, :col_sm => field_col %>
+</div>
+
+<div class="form-group">
+    <%= f.label :email, :col_sm => label_col %>
+    <%= f.email_field :email, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :password, :col_sm => label_col %>
+    <%= f.password_field :password, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :password_confirmation, :col_sm => label_col %>
+    <%= f.password_field :password_confirmation, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :date_of_birth, :col_sm => label_col %>
+    <%= f.date_select :date_of_birth, {:start_year => Time.now.year - 100, :end_year => Time.now.year}, :col_sm => field_col, :style => "display: inline; width: 32%;" %>
+</div>
+<div class="form-group">
+    <%= f.label :username, :col_sm => label_col %>
+    <%= f.text_field :username, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :addr_street, :col_sm => label_col %>
+    <%= f.text_field :addr_street, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :addr_postcode, :col_sm => label_col %>
+    <%= f.text_field :addr_postcode, :col_sm => label_col %>
+</div>
+<div class="form-group">
+    <%= f.label :addr_city, :col_sm => label_col %>
+    <%= f.text_field :addr_city, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :country, :col_sm => label_col %>
+    <%= f.country_select :country, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :phone_number, :col_sm => label_col %>
+    <%= f.text_field :phone_number, :col_sm => field_col %>
+</div>
+<div class="form-group">
+    <%= f.label :avatar, :col_sm => label_col %>
+    <%= f.file_field :avatar, :title => t(:browse), :class => "btn-primary" %>
+</div>
+<div class="form-group">
+    <%= f.label :id_card, :col_sm => label_col %>
+    <%= f.file_field :id_card, :title => t(:browse), :class => "btn-primary" %>
+</div>

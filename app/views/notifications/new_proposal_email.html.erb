@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<div style="margin-left: auto; margin-right: auto; width:50%;">
+  <div style="border:1px solid black; border-radius:8px; border:1px solid black;">
+    <div style = "background-color: rgb(32, 45, 59); color:white; border-top-left-radius:8px; border-top-rigth-radius:8px;">
+      <div style="display:inline-block; vertical-align: top; width:40%;"><img src="http://solidare-it.org/sites/all/themes/zen/logo.png"/></div><div style="padding-top:5%; display:inline-block; vertical-align: top; width:56%;"><a style="font-size:58px; color:white;">Solidare-IT</a></div>
+    </div>
+    <div style="padding-left:1%;padding-top:1%;">
+    <h2 style ="font-size:25px; /*font-style:italic;*/ font-weight:bold; margin-top:1%;">Hi <%= @author_exchange.username %>, you receive a new proposal !</h2>
+    <!--<blockquote>-->
+      <p>
+        You have received a proposal for your exchange : "<%= @exchange.title %>", from "<%= User.find(@proposal.user_id).username %>" . Thanks for joining and have a great day!
+        <br/>
+      </p>
+      <p style="width:55%; display:inline-block;"><small>Don't waste your time, take a look now <a>Solidare-it</a></small></p>
+      <ul style= "list-style-type: none; width:20%; margin-top:1%; display:inline-block ">
+        <li style="display:inline-block;"><a href = "https://plus.google.com/"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRDErmkb1CZ3VwCxSexQut1XkOzt7lZnXDBdqgQ37FDmcaiw2B8"/></a></li>
+        <li style="display:inline-block;"><a href = "https://twitter.com/"><img src="http://i928.photobucket.com/albums/ad129/zhar_zac/for%20public/twitter-icon-black-40_zps46e2e309.png"/></a></li>
+        <li style="display:inline-block;"><a href = "https://www.facebook.com/"><img src="http://files.softicons.com/download/internet-icons/dusseldorf-icons-by-pc.de/png/32/facebook.png"/></a></li>
+      </ul>
+    <!--</blockquote>-->
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<%= link_to t(:create_organization), new_organization_path, :class => "btn btn-primary", :style => "float: right;" %>
+<h2><%=t :list_organizations %></h2>
+
+<br /><br /><br />
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%=t :name %></th>
+      <th><%=t :members %></th>
+      <th><%=t :phone_number %></th>
+      <th><%=t :site_url %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= link_to organization.name, organization %></td>
+        <td><%=t :members_count, count: organization.memberships.count %></td>
+        <td><%= organization.phone_number %></td>
+        <td><%= organization.site_url %></td>
+        <td>
+            <% if organization.has_admin? current_user %>
+                <%= link_to edit_organization_path(organization), :style => "color: black; text-decoration: none;" do %><i class="fa fa-pencil"></i><% end %>&nbsp;&nbsp;
+                <%= link_to organization, method: :delete, :style => "color: black; text-decoration: none;" do %><i class="fa fa-trash-o"></i><% end %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

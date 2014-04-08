@@ -1,0 +1,15 @@
+<h2><%=t :sign_up %></h2><br />
+
+<%= bootstrap_horizontal_form_for resource, :url => registration_path(resource) do |f| %>
+    <%= devise_error_messages! %>
+
+    <%= render :partial => "user", :locals => { :f => f, :label_col => 2, :field_col => 3 } %>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-3">
+            <%= f.submit "Sign up", :class => "pull-right" %>
+        </div>
+    </div>
+
+<% end %>
+

@@ -1,0 +1,35 @@
+<h1><%=t :exchanges %></h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @all == 0 %>
+        <%= will_paginate @exchanges.results, renderer: BootstrapPagination::Rails %>
+    <% else %>
+        <%= will_paginate @exchanges, renderer: BootstrapPagination::Rails %>
+    <% end %>
+  </div>
+</div>
+
+
+<% if @all == 0 %>
+    <div class="row">
+      <div class="col-md-12">
+        <% @exchanges.results.each_with_index  do |exchange, index| %>
+              <%= render "exchange_result", :exchange => exchange, :index => index %>
+              <div class="line-break">&nbsp;</div>
+        <% end %>
+        <input type="hidden" id="total" value="<%= @exchanges.results.count() %>" />
+      </div>
+    </div>
+
+<% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <% @exchanges.each_with_index do |exchange, index| %>
+              <%= render "exchange_result", :exchange => exchange, :index => index %>
+            <div class="line-break">&nbsp;</div>
+        <% end %>
+        <input type="hidden" id="total" value="<%= @exchanges.count() %>" />
+      </div>
+    </div>
+<% end %>

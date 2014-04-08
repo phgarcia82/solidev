@@ -1,0 +1,271 @@
+en:
+  en: English
+  browse: Browse
+  home: Home
+  click_here: Click here
+  register_as_user: Register as user
+  register_as_organization: Register as organization
+  sign_in: Sign in
+  sign_out: Sign out
+  edit_account: Edit my account
+  blank_password: (Leave the password blank if you do not want to change it)
+  remember_me: Remember me
+  you: You
+  your_organization: Your organization
+  new_organization: Create a new organization
+  new_organization_button: Create the organization
+  edit_organization: Edit the organization
+  edit_organization_button: Save
+  add_member: Add a new member
+  creation_date: Creation date
+  modification_date: Last modification date
+  new_comment: New comment
+  save_comment: Save
+  save_status: Change the status
+  comment_created: Your comment was successfully created.
+  comment_deleted: Your comment was successfully deleted.
+  proposal_created: Your proposal was successfully created.
+  proposal_deleted: Your proposal was successfully deleted.
+  exchange_created: Your exchange was successfully created.
+  exchange_deleted: Your exchange was successfully deleted.
+  exchange_updated: Your exchange was successfully updated.
+  not_the_owner: You are not the author of this exchange.
+
+  failed_form: prevented to save your entry
+  thanks_to_correct: Thanks to correct that !
+
+  descriptionform: Description (min 15)
+  new_exchange_button: Submit
+  no_type_error: You have to choose one type of exchange
+  list_exchange: Exchanges
+  exchange_type: Type
+
+  organization_error: You don't have the right to modify this organization.
+  organization_updated: Organization was successfully updated.
+  organization_created: Organization was successfully created.
+
+  organizations: Organizations
+  all_organizations: All the organizations
+  none_organizations: None
+  people_in_need: People in need
+  add_people_in_need: Add a new person in need
+  none_people_in_need: None
+  list_organizations: Organizations
+  create_organization: Create a new organization
+  manage_this_organization: Manage the current organization
+
+
+  forgot_password: Forgot your password?
+  send_password: Send me reset password instructions
+
+  members: Members
+  admin: admin
+  founder: founder
+  name: Name
+  address: Address
+  addr_street: Address
+  addr_postcode: Postcode
+  addr_city: City
+  phone_number: Phone number
+  site_url: Website
+
+  # contact
+  facebook_url: Facebook profile
+  facebook_page: Facebook page
+  gmail_address: Gmail address
+  contact_message: To contact us, here are some useful informations
+
+  exchanges: Exchanges
+  title: Title
+  start: Launch date
+  end: Closing date
+  city: City
+  country: Country
+  description: Description
+  is_offer: Offer
+  is_demand: Demand
+  quantity: Quantity
+
+  new_exchange_button: Submit
+  no_type_error: You have to choose one type of exchange
+  all_exchanges: All the exchanges
+  list_exchange: Exchanges
+  exchange_type: Type
+  create_exchange: Create an exchange
+  new_exchange: New exchange
+  both_exchange: Offer and Demand
+  edit_exchange_button: Edit
+  editing_exchange: Edition of exchange
+
+  members_count: {
+    one: '1 member',
+    other: '%{count} members'
+  }
+  people_in_need_count: {
+    zero: '0 people in need',
+    one: '1 person in need',
+    other: '%{count} people in need'
+  }
+  sign_up: Sign up
+  activerecord:
+    attributes:
+      user:
+          date_of_birth: Birth date
+          addr_street: Address
+          addr_postcode: Postcode
+          addr_city: City
+          avatar: Avatar
+          country: Country
+          current-password: Current password
+          email: Email
+          first_name: First name
+          last_name: Last name
+          id_card: Id card
+          password: Password
+          password_confirmation: Password confirmation
+          phone_number: Phone number
+          user_name: User name
+      organization:
+          addr_street: Address
+          addr_postcode: Postcode
+          addr_city: City
+          site_url: Website
+          facebook_url: Facebook profile
+          description: Description
+          email: Email
+          name: Name
+          phone_number: Phone number
+
+      # translation for proposal
+      proposal:
+          explanation: Details
+          proposer_rating: Rating by proposer
+          proposer_msg: Message from proposer
+          owner_rating: Rating by exchange's owner
+          owner_msg: Message from exchange's owner
+
+  # search box in exchange
+  search_place_holder: Enter exchange here...
+  or_goto_advanced_search: Enable advanced search
+  advanced_search_title: Advanced search
+
+  # exchange error messages
+  exchange_error_required_title: Please enter at least the query (title) of the exchange!
+
+
+  # general form action
+  edit: Edit
+  delete: Delete
+  is_visible: Public
+
+  # proposal-related translation
+  proposals: Proposals
+  proposal: Proposal
+  new_proposal: New Proposal
+  new_proposal_button: Create proposal
+  proposals_count: The set of the Proposals
+  exchanges_count: The set of the Exchanges
+
+  # comment
+  last_comments: 10 Last comments
+
+
+  author: Author
+
+
+
+  lbl_start_from: Start from
+  lbl_expire_on: Expire on
+  lbl_by: by
+  lbl_at: at
+  lbl_status: Status
+  lbl_location: Location
+
+  btn_create: Create
+  btn_save: Save
+  btn_update: Update
+  btn_edit: Edit
+  btn_cancel: Cancel
+  btn_goback: Go back
+
+  hide_advanced_search: Hide advanced search
+  show_advanced_search: Show advanced search
+  see_details: See details
+
+  owner_rating: Rating by exchange owner
+  proposer_rating: Rating by proposer
+
+  us: Us
+  about: About
+  contact: Contact
+  contact_us: Contact us
+  picture: Picture
+  my_profile: My profile
+  my_profil: My profile
+
+  create_assistance:   Create assistant
+  new_assistance: New assistance
+
+# manage organisation
+  edit_this_organization: Edit this organization
+  ask_to_join: Ask to join
+  validation_sent: Request sent
+
+# exchange
+  last_exchanges: Last exchanges
+  exchange_express: Express exchanges
+  end_time: End time
+  start_time: Start time
+
+# user
+  username: Username
+  full_name: Full name
+  last_new_user: Last new users
+  email: Email
+  date_of_birth: Birthdate
+  recently_joined_users: Recently joined users
+  avatar: Avatar
+  proposal_on: Proposal on
+
+# date time format
+  date:
+    formats:
+      default: "%d %B %Y"
+  datetime:
+    formats:
+      defaults: "%Y-%m-%d %H:%M:%S"
+
+
+  # misc
+  number: Number
+  category: Category
+  by: by
+
+  #about
+  about_text01: This website was created by a team of students from the university of Louvain-La-Neuve for the course SINF2255.
+  about_text02: This website aims at providing an online service that helps people to make some trades or donations.
+  project_licence: Project licence
+  about_title: About us
+
+  #home_page
+  title_home01: Take the time
+  title_home02: to give some help...
+  number: Number
+  my_profil: My profile
+  exchange: Exchange
+  requests: Asked to join
+  edit_membership: Update the member
+  close: Close
+
+  #profil_page
+  avatar: Avatar
+
+  title: Title
+  user_email: Email
+  user_id: Id
+  addr_city: City
+  addr_postcode: Postcode
+  addr_street: Street
+  description: Description
+  email: Email
+  nl: Dutch

@@ -1,0 +1,212 @@
+nl:
+  nl: Nederlands
+  browse: Kiezen
+  home: Home
+  register_as_user: Nieuwe gebruiker
+  register_as_organization: Nieuwe organisatie
+  sign_in: Inloggen
+  sign_out: Uitloggen
+  remember_me: Remember me
+  you: Uw gegevens
+  your_organization: Uw organisatie
+  new_organization: Maak een nieuwe organisatie
+  new_organization_button: Maak de organisatie
+  edit_organization: Bewerk de organisatie
+  edit_organization_button: Bewerken
+  organization_error: U kunt dit niet doen.
+  organization_updated: De organisatie werd gewijzigd.
+  organization_created: De organisatie werd aangemaakt.
+  list_organizations: Organisaties
+  create_organization: Maak een nieuwe organisatie
+  create_assistance: bijstand te creëren
+  forgot_password: Wachtwoord vergeten?
+  send_password: Stuur de reset instructies
+  new_assistance: nieuwe bijstand
+  comment_created: Your comment was successfully created.
+  comment_deleted: Your comment was successfully deleted.
+  proposal_created: Your proposal was successfully created.
+  proposal_deleted: Your proposal was successfully deleted.
+  exchange_created: Your exchange was successfully created.
+  exchange_deleted: Your exchange was successfully deleted.
+  exchange_updated: Your exchange was successfully updated.
+  not_the_owner: You are not the author of this exchange.
+
+  members_count: Leden
+  admin: admin
+  founder: oprichter
+  name: Naam
+  addr_street: Adress
+  addr_postcode: Postcode
+  addr_city: Stad
+  phone_number: Telefoonnummer
+  site_url: Website
+  facebook_url: Facebook profiel
+  proposal_on: voorstel
+
+  validation_sent: validatie verzonden
+  new_exchange_button: Vooruit
+  create_exchange: Maak een uitwisseling
+  new_exchange: Niew uitwisseling
+  no_type_error: U moet ten minste een soort van uitwisseling te selecteren
+  list_exchange: Uitwisseling
+  edit_exchange_button: Uitgeven
+  editing_exchange: Editie van uitwisseling
+
+  exchanges: Uitwisselingen
+  title: Titel
+  start: Start Datum
+  end: Sluitingsdatum
+  city: Stad
+  country: Land
+  description: Beschrijving
+  is_offer: Biedt
+  is_demand: Toepassing
+  quantity: Kwantiteit
+  both_exchange: Biedt en Toepassing
+
+
+  member: {
+    zero: '0 lid',
+    one: '1 lid',
+    other: '%{count} leden'
+  }
+  sign_up: Registreren
+  activerecord:
+    attributes:
+      user:
+          first_name: Voornaam
+          last_name: Achternaam
+          password: Wachtwoord
+          password_confirmation: Wachtwoord (bevestiging)
+          date_of_birth: Geboortedatum
+          username: username
+          addr_street: Adress
+          addr_postcode: Postcode
+          addr_city: Stad
+          phone_number: Telefoonnummer
+          id_card: Identiteitskaart
+          avatar: avatar
+          country: land
+          current-password: huidige wachtwoord
+          email: e-mail
+      organization:
+          name: Naam
+          addr_street: Adress
+          addr_postcode: Postcode
+          addr_city: Stad
+          phone_number: Telefoonnummer
+          site_url: Website
+          facebook_url: Facebook profiel
+          description: beschrijving
+          email: e-mail
+      exchange:
+                title: Titel
+                quantity: Hoeveelheid
+                is_offer: Aanbod
+                is_demand: Application
+                start: Start Datum
+                end: Sluitingsdatum
+                city: Stad
+                country: Land
+                description: Beschrijving
+                exchange: Uitwisseling
+
+  # search box in exchange
+  search_place_holder: Voer hier uitwisseling ...
+  or_goto_advanced_search: Schakel geavanceerde zoekopdracht
+  advanced_search_title: Geavanceerd zoeken
+
+  # exchange error messages
+  exchange_error_required_title: Voer ten minste de query (titel) van de uitwisseling!
+
+  # Algemene vorm actie
+  edit: Bewerken
+  delete: Verwijder
+
+  # proposal-related translation
+  proposals: voorstellen
+  new_proposal: nieuw voorstel
+  new_proposal_button: voorstel te creëren
+
+  # date time format
+  date:
+    formats:
+      default: "%d %B %Y"
+
+  # contact
+  facebook_url: facebook profiel
+  facebook_page: facebook pagina
+  gmail_address: Gmail adres
+  contact_message: Om ons te contacteren, hier is wat nuttige informatie
+  address: adres
+  contact_us: Contact met ons op
+  # about
+  about_text01: Deze website is opgericht door een groep studenten van de universiteit van Louvain-la-Neuve voor de cursus SINF2255
+  about_text02: Deze website biedt een dienst waarmee mensen om te ruilen of te doneren
+  project_licence: Project License
+  about_title: Over ons
+
+  # page/home
+  last_exchanges: De laatste handel
+  recently_joined_users: Geregistreerde gebruikers Recenten
+  exchange_express: Ruilen van
+  author: Auteur
+  exchange: Uitwisselingen
+  end_time: Einddatum
+  title_home01: Neem de tijd
+  title_home02: om wat hulp te geven ...
+  username: gebruikersnaam
+  organizations: Organisaties
+  number: Aantal
+  my_profil: Mijn profiel
+  edit_account: Accountgegevens bewerken
+  about: Over
+  contact: Contact
+
+  #profil_page
+  avatar: avatar
+  full_name: volledige naam
+  date_of_birth: geboortedatum
+  email: e-mail
+  exchanges_count: Al mijn uitwisselingen
+  proposals_count: Al mijn voorstellen
+  last_comments: de laatste 10 reacties
+  none_organizations: geen organisaties
+  all_organizations: alle organisaties
+
+  #edit profil
+  blank_password: (Laat leeg als u niet wilt dat uw wachtwoord te wijzigen)
+
+  #all organization
+  members: lid
+
+  #Exchanges page
+  see_details: zie details
+  by: van
+  creation_date: Aanmaakdatum
+  modification_date: Wijzigingsdatum
+  category: Categorie
+  lbl_by: van
+  lbl_status: toestand
+  save_comment: besparen
+  is_visible: publiek
+  add_member: voeg een lid
+  click_here: klik hier
+  people_in_need: mensen in nood
+  none_people_in_need: geen mensen in nood
+  add_people_in_need: Het toevoegen van mensen in nood
+  edit_this_organization: deze organisatie bewerk
+  people_in_need_count: {
+    zero: '0 mensen in nood',
+    one: '1 mensen in nood',
+    other: '%{count} mensen in nood'
+  }
+  show_advanced_search: Geavanceerd zoeken
+  title: titel
+  user_email: gebruiker e-mail
+  user_id: user id
+  addr_city: stad
+  addr_postcode: postcode
+  addr_street: straat
+  description: beschrijving
+  email: e-mail

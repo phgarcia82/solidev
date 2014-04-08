@@ -1,0 +1,19 @@
+<h1><%= t :editing_exchange %>: <b><%= @exchange.title %></b> </h1>   <br />
+<%= render 'shared/error_messages' %>
+
+<%= bootstrap_horizontal_form_for(@exchange) do |f| %>
+
+    <%= render :partial => "exchange", :locals => { :f => f, :label_col => 2, :field_col => 4 } %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <%= f.submit t :btn_update %>
+      </div>
+    </div>
+
+<% end %>
+
+
+
+<%= link_to 'Show', @exchange %> |
+<%= link_to 'Back', exchanges_path %>

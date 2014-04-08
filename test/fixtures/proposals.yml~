@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<<<<<<< HEAD
+one:
+  explanation: MyString
+  status: 1
+  exchange_id: 1
+  proposer_id: 1
+  proposer_rating: 1
+  proposer_msg: MyString
+  owner_rating: 1
+  owner_msg: MyString
+  is_visible: false
+
+two:
+  explanation: MyString
+  status: 1
+  exchange_id: 1
+  proposer_id: 1
+  proposer_rating: 1
+  proposer_msg: MyString
+  owner_rating: 1
+  owner_msg: MyString
+  is_visible: false
+=======
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value
+>>>>>>> 34fc80b457dd505235f950e50933718b02ba96fa

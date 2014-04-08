@@ -1,0 +1,13 @@
+<h2><%= t :new_exchange %></h2><br />
+<%= render 'shared/error_messages' %>
+
+<%= bootstrap_horizontal_form_for(@exchange) do |f| %>
+
+<%= render :partial => "exchanges/exchange", :locals => { :f => f, :label_col => 2, :field_col => 4 } %>
+    <div class="col-sm-offset-2 col-sm-4 pull-right">
+        <%= link_to t(:btn_goback), exchanges_path, :class => "btn btn-danger"  %>
+        <%= f.submit t :btn_create %>
+      </div>
+
+<% end %><br /><br />
+

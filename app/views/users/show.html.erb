@@ -1,0 +1,81 @@
+<h2><%= @author.full_name %></h2>
+<div class="well pull-right">
+
+  <h3> <%=t :avatar %></h3>
+  <%= image_tag @author.avatar.url(:medium), :style => " border-radius: 3px; position: relative; top: 3px; width: 250px;" %>
+  <br /><br />
+</div>
+
+<span style="position: relative; top: 3px; padding: 0 5px;">
+    <%= rateit_tag(value: @author.rating, max: 5, min: 0, ispreset: true, readonly: true) %>
+</span>
+
+
+
+<div style="/*border:1px solid black; border-radius:15px;*/ margin-right:75%; padding-left:3%;">
+  <span class="glyphicon glyphicon-font:22px"></span>
+  <table class="table table-hover">
+    <tr>
+      <th><%= t :full_name %></th>
+      <td><%= @author.first_name %> <%= @author.last_name %></td>
+    </tr>
+    <tr>
+      <th><%= t :username %></th>
+      <td><%= @author.username %></td>
+    </tr>
+    <tr>
+      <th> <%= t :date_of_birth %> </th>
+      <td><%= @author.date_of_birth %> </td>
+    </tr>
+    <tr>
+      <th><%= t :email %></th>
+      <td ><%= @author.email %> </td>
+    </tr>
+    <tr>
+      <th><%= t :addr_street %> </th>
+      <td><%= @author.addr_street %> - <%= @author.addr_postcode %> <%= @author.addr_city %></td>
+    </tr>
+    <tr>
+      <th><%= t :phone_number %> </th>
+      <td><%= @author.phone_number %></td>
+    </tr>
+    <tr>
+      <th><%= t :facebook_url %> </th>
+      <td><%= @author.facebook_url %></td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="well pull-left">
+  <%=t :exchanges_count, count: @author.own_exchanges.count %>
+  <hr style="margin-top: 5px;" />
+
+  <% @author.own_exchanges.each do |e| %>
+      <%= link_to e.title, e %>
+      <br />
+  <% end %>
+</div>
+
+<div class="well pull-left" style="margin-left:1%;">
+  <%=t :proposals_count, count: @author.own_proposals.count %>
+  <hr style="margin-top: 5px;" />
+
+  <% @author.own_proposals.each do |p| %>
+      <% if p.exchange != nil %>
+          <%= t :proposal_on %> : <%= link_to "#{p.exchange.title}",p.exchange %>
+          <br />
+      <% end %>
+  <% end %>
+</div>
+<div>
+  <div class="well pull-left" style="margin-left:1%;">
+    <%=t :last_comments %>
+    <hr style="margin-top: 5px;" />
+
+    <% (Comment.where("user_id = ?",@author.id)).last(10).each do |p| %>
+        Comment on <%= link_to "#{p.content}", p.proposal.exchange %>
+        <br />
+    <% end %>
+  </div>
+</div>

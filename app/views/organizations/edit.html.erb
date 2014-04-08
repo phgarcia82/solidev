@@ -1,0 +1,14 @@
+<h2><%=t :edit_organization %></h2><br />
+<%= render 'shared/error_messages' %>
+
+<%= bootstrap_horizontal_form_for(@organization) do |f| %>
+
+    <%= render :partial => "devise/registrations/organization", :locals => { :f => f, :label_col => 2, :field_col => 4 } %>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <%= f.submit t :edit_organization_button %>
+        </div>
+    </div>
+
+<% end %>

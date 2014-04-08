@@ -1,0 +1,29 @@
+<h2><%=t :sign_up %></h2><br />
+
+<%= bootstrap_horizontal_form_for resource, :url => registration_path(resource) do |f| %>
+  <%= devise_error_messages! %>
+    <%= render 'shared/error_messages' %>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <legend><%=t :you %></legend>
+            <%= render :partial => "user", :locals => { :f => f, :label_col => 4, :field_col => 8 } %>
+        </div>
+
+        <div class="col-sm-5">
+            <legend><%=t :your_organization %></legend>
+
+          <%= f.fields_for "organizations", resource.organizations.new do |o| %>
+                <%= render :partial => "organization", :locals => { :f => o, :label_col => 4, :field_col => 8 } %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <%= f.submit t(:sign_up), :class => "pull-right" %>
+        </div>
+    </div>
+
+<% end %>
+

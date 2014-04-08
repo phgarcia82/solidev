@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  explanation: MyText
+  organisation: 1
+  user: 1
+  city: 1
+  city_radius: 1.5
+  category: 1
+  type: 1
+  frequency: 1
+  start: 2013-12-02
+  end: 2013-12-02
+
+two:
+  title: MyString
+  explanation: MyText
+  organisation: 1
+  user: 1
+  city: 1
+  city_radius: 1.5
+  category: 1
+  type: 1
+  frequency: 1
+  start: 2013-12-02
+  end: 2013-12-02

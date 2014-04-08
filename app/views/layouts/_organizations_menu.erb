@@ -1,0 +1,30 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <% if @current_organization.nil? %>
+        <%= t(:organizations) %>
+      <% else %>
+          <%= @current_organization.name %>
+      <% end %><b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <% @menu_organizations.each do |o| %>
+        <li><%= link_to rewrite_current_with_organization(o) do %>
+            <%= o.name %>
+            <% if o == @current_organization %>
+                &nbsp;&nbsp;<i class="fa fa-check"></i>
+            <% end %>
+        <% end %></li>
+    <% end %>
+    <li><%= link_to rewrite_current_with_organization(nil) do %>
+        <%=t :none_organizations %>
+        <% if @current_organization.nil? %>
+            &nbsp;&nbsp;<i class="fa fa-check"></i>
+        <% end %>
+    <% end %></li>
+    <li role="presentation" class="divider"></li>
+    <% if !@current_organization.nil? %>
+      <li><%= link_to t(:manage_this_organization), organization_path(@current_organization) %></li>
+    <% end %>
+    <li><%= link_to t(:all_organizations), organizations_path %></li>
+    <li><%= link_to t(:create_organization), new_organization_path %></li>
+  </ul>
+</li>

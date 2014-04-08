@@ -1,0 +1,38 @@
+<% if @organization.has_admin?(current_user) %>
+    <%= link_to edit_organization_path(@organization), :class => "btn btn-primary pull-right" do %><i class="fa fa-pencil"></i> <%= t(:edit) %><% end %>
+<% end %>
+
+<h2><%= @organization.name %></h2><br /><br />
+
+<div class="pull-right col-sm-4" style="margin-left: 20px;">
+    <div class="well">
+        <%= render "organizations/show_memberships" %>
+    </div>
+    <div class="well">
+        <%= render "organizations/show_assistances" %>
+    </div>
+</div>
+
+
+
+<strong><%=t :address %>:</strong><br />
+<%= @organization.addr_street %><br />
+<%= @organization.addr_postcode %> <%= @organization.addr_city %><br /><br />
+
+<div style="display: table;">
+    <div style="display: table-row">
+        <i class="fa fa-phone" style="display: table-cell; text-align: center;"></i>
+        <span style="display: table-cell;">&nbsp;&nbsp;<%= @organization.phone_number %></span>
+    </div>
+    <div style="display: table-row">
+        <i class="fa fa-home" style="display: table-cell; text-align: center;"></i>
+        <span style="display: table-cell;">&nbsp;&nbsp;<%= @organization.site_url %></span>
+    </div>
+    <div style="display: table-row">
+        <i class="fa fa-facebook" style="display: table-cell; text-align: center;"></i>
+        <span style="display: table-cell;">&nbsp;&nbsp;<%= @organization.facebook_url %></span>
+    </div>
+</div><br />
+
+<strong><%=t :description %>:</strong><br />
+<%= @organization.description %>

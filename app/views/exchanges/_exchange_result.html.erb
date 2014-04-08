@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-2">
+        <% if exchange.picture.exists? %>
+            <%= image_tag exchange.picture.url(:thumb), :style=>"width:100%;height:100%;" %>
+        <% end %>
+    </div>
+
+
+  <div class="col-md-10">
+        <h3><%= link_to exchange.title, exchange, :id=>index %></h3>
+        <span style="font-size: small;">
+                <%=  if exchange.is_offer && exchange.is_demand then t :both_type
+                     elsif exchange.is_offer then t :is_offer
+                     elsif exchange.is_demand then t :is_demand
+                     end
+                %>
+        <br />
+            <%=t :by %> <strong><%= link_to owner_name(exchange), owner_link(exchange), :class => "text-primary", :style => "text-decoration: none;" %></strong>
+            <br />
+            <strong><%=t :start %>:</strong>
+            <a href="#" data-toggle="tooltip" title="<%=l exchange.start %>"><%= timeago_tag exchange.start.to_time, :force => true %></a><br />
+            <strong><%=t :end %>:</strong>
+            <a href="#" data-toggle="tooltip" title="<%=l exchange.end %>"><%= timeago_tag exchange.end.to_time, :force => true %></a><br />
+         </span>
+
+        <!-- Location information -->
+        <div style="display:none;">
+            <span id="location-<%= index %>"><%= exchange.latitude.to_s + ',' + exchange.longitude.to_s %></span>
+            <input id="current-<%= index %>" type="text" disabled="disabled" />
+            <span id="current-id-<%= index %>"><%= exchange.id %></span>
+        </div>
+
+            <span style="display:block; word-wrap: break-word;">
+              <%=raw exchange.description %>
+                ...
+                <%= link_to t(:see_details), exchange %>
+            </span>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<% @proposals.each do |proposal| %>
+
+    <% if proposal.is_visible || is_owner(proposal) || is_owner(@exchange) %>
+        <div style="display: table;"><div style="display: table-row">
+            <div style="display: table-cell; vertical-align: top; padding-right: 10px;">
+                <%= link_to owner_link(proposal) do %><%= image_tag owner_image(proposal).url(:icon), :style => "border-radius: 3px; position: relative; top: 3px;" %><% end %>
+            </div>
+            <div style="display: table-cell; vertical-align: top;">
+                            <span class="description">
+                                <strong><%= link_to owner_name(proposal), owner_link(proposal), :class => "text-primary", :style => "text-decoration: none;" %></strong>
+                                <%= proposal.description %><br />
+
+                                <% if is_owner(proposal) && proposal.can_change_content %>
+                                  <%= link_to [@exchange, proposal], :class => "edit-proposal text-primary" do %><i class="fa fa-pencil"> <%=t :edit %></i><% end %>&nbsp;&nbsp;
+                                    <%= link_to [@exchange, proposal], :method => "DELETE", :class => "text-primary" do %><i class="fa fa-trash-o"> <%=t :delete %></i>&nbsp;&nbsp;<% end %>
+                                <% end %>
+                                <% if is_owner(@exchange) && proposal.can_change_status %>
+                                  <%= form_for [@exchange, proposal], :html => {:class => "description-form"} do |f| %>
+                                        <%= f.select :status, Proposal.statuses_for_select, {}, {:class => "form-control input-sm", :style => "width: 100px; height: 30px; margin-right: 3px; display: inline; padding-top: 3px; padding-down: 0px;"} %>
+                                        <%= f.submit t(:save_status), :class => "btn btn-xs btn-primary" %>
+                                    <% end %>
+                                <% else %>
+                                    <strong><%=t :lbl_status %>:</strong> <%= proposal.status %><br />
+                                <% end %>
+
+                                <% if is_owner(@exchange) && proposal.can_owner_rate %>
+                                  <%= form_for [@exchange, proposal], :html => {:class => "description-form"} do |f| %>
+
+                                        <%= f.submit t(:save_rating), :class => "btn btn-xs btn-primary pull-right" %>
+                                        <span style="position: relative; top: 4px; padding-right: 5px; padding-bottom: 5px;">
+                                            <%= f.number_field(:owner_rating, min: 0, max: 5, step: 1, :id => "owner_rating_"+proposal.id.to_s) %>
+                                            <%= rateit_tag(backingfld: "#owner_rating_"+proposal.id.to_s, max: 5, min: 0, step: 1, resetable: "false") %>
+                                        </span>
+                                        <%= f.text_area :owner_msg, :class => "form-control", :rows => 1, :placeholder => t(:your_rating_message) %>
+                                    <% end %>
+                                <% elsif !proposal.owner_rating.nil? || !proposal.owner_msg.blank? %>
+                                    <strong><%=t :owner_rating %>:</strong>
+                                    <span style="position: relative; top: 3px; padding: 0 5px;"><%= rateit_tag(value: proposal.owner_rating, max: 5, min: 0, ispreset: true, readonly: true) %></span><br />
+                                    <% if !proposal.owner_msg.blank? %>
+                                        <%= proposal.owner_msg %><br />
+                                    <% end %>
+                                <% end %>
+
+                                <% if is_owner(proposal) && proposal.can_proposer_rate %>
+                                  <%= form_for [@exchange, proposal], :html => {:class => "description-form"} do |f| %>
+                                        <%= f.submit t(:save_rating), :class => "btn btn-xs btn-primary pull-right" %>
+                                        <span style="position: relative; top: 4px; padding-right: 5px; padding-bottom: 5px;">
+                                            <%= f.number_field(:proposer_rating, min: 0, max: 5, step: 1, :id => "proposer_rating_"+proposal.id.to_s) %>
+                                            <%= rateit_tag(backingfld: "#proposer_rating_"+proposal.id.to_s, max: 5, min: 0, step: 1, resetable: "false") %>
+                                        </span>
+                                        <%= f.text_area :proposer_msg, :class => "form-control", :rows => 1, :placeholder => t(:your_rating_message) %>
+
+                                    <% end %>
+                                <% elsif !proposal.proposer_rating.nil? || !proposal.proposer_msg.blank? %>
+                                    <strong><%=t :proposer_rating %>:</strong>
+                                    <span style="position: relative; top: 3px; padding: 0 5px;"><%= rateit_tag(value: proposal.proposer_rating, max: 5, min: 0, ispreset: true, readonly: true) %></span><br />
+                                    <% if !proposal.owner_msg.blank? %>
+                                        <%= proposal.proposer_msg %><br />
+                                    <% end %>
+                                <% end %>
+
+                            </span>
+
+                <%= form_for [@exchange, proposal], :html => {:class => "description-form", :style => "display: none;"} do |f| %>
+                    <%= f.text_area :description, :class => "form-control" %>
+                    <div class="form-group" style="margin: 0;">
+                        <div class="checkbox" style="margin: 0;">
+                            <label>
+                                <%= f.check_box :is_visible %> <%=t :is_visible %>
+                            </label>
+                        </div>
+                    </div>
+                    <%= f.submit t(:btn_save), :class => "btn btn-xs btn-primary" %>
+                    <a class="cancel btn btn-xs btn-info"><%=t :btn_cancel %></a>
+                <% end %>
+                <div style="display: table; padding-top: 8px;">
+                    <% proposal.comments.each do |comment| %>
+                        <div style="display: table-row">
+                            <div style="display: table-cell; vertical-align: top; padding-right: 5px;">
+                                <%= link_to owner(comment) do %><%= image_tag owner_image(comment).url(:navbar), :style => "border-radius: 2px; margin: 1px 0; position: relative; top: -3px;" %><% end %>
+                            </div>
+                            <div style="display: table-cell; vertical-align: top;">
+                                            <span class="description">
+                                                <strong><%= link_to owner_name(comment), owner_link(comment), :class => "text-primary", :style => "text-decoration: none;" %></strong>
+                                                <%= comment.content %>
+                                                <% if proposal.can_change_content && is_owner(comment) %>
+                                                    &nbsp;&nbsp;<%= link_to [@exchange, proposal, comment], :method => "DELETE", :class => "text-primary" do %><i class="fa fa-trash-o"></i><% end %><br />
+                                                <% end %>
+                                            </span>
+                            </div>
+
+                        </div>
+                    <% end %>
+                    <% if proposal.can_change_content %>
+                        <div style="display: table-row;">
+                            <div style="display: table-cell; vertical-align: top; padding-right: 5px;"></div>
+                            <div style="display: table-cell; vertical-align: top;">
+                                <%= form_for [@exchange, proposal, proposal.comments.new], :html => {:class => "description-form" } do |f| %>
+                                    <%= f.text_area :content, :id => 'commentText', :class => "form-control", :rows => 1, :placeholder => t(:new_comment), :style => "display: inline;" %>
+                                    <%= f.submit t(:save_comment), :class => "btn btn-xs btn-primary", :id=>'commentSubmit', :style => "margin-top: 3px;" %>
+
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+
+            </div>
+        </div></div>
+        <hr style="margin: 15px 0 20px 0; border-top-color: rgb(200,200,200);" />
+    <% end %>
+<% end %>
+
+
+<%= javascript_tag do %>
+    var actualize = function() {
+        $(".edit-proposal").each(function() {
+            $(this).click(function(event) {
+                event.preventDefault();
+                var toReplace = $(this).parent().first();
+                var descriptionForm = $(this).parent().parent().children(".description-form").first();
+                var descriptionFormClone = descriptionForm.clone();
+                descriptionFormClone.show();
+                descriptionFormClone.children("textarea").autosize();
+                descriptionFormClone.children(".cancel").click(function(e) {
+                    event.preventDefault();
+                    descriptionFormClone.replaceWith(toReplace);
+                    actualize();
+                });
+                descriptionFormClone.keyup(function(e) {
+                    if (e.keyCode == 27) { descriptionFormClone.replaceWith(toReplace); }
+                });
+                toReplace.replaceWith(descriptionFormClone);
+
+
+            });
+        });
+     };
+    actualize();
+
+<% end %>
+
+

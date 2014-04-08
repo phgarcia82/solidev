@@ -1,0 +1,104 @@
+<i class="fa fa-heart-o"></i>&nbsp;&nbsp;
+<%=t :people_in_need_count, count: @assistances.count %>
+<hr style="margin-top: 5px;" />
+
+<% if @organization.has_admin? current_user %>
+
+    <% @assistances.each do |a| %>
+        <%= link_to edit_organization_assistance_path(@organization, a.user), :class => "launch-assistance-modal" do %><i class="fa fa-pencil text-primary"></i><% end %>&nbsp;
+        <%= a.user.full_name %>
+        <br />
+    <% end %><br />
+    <strong><%=t :add_people_in_need %></strong><br />
+    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#new-assistance">
+        <li class="fa fa-plus"></li> <%=t :click_here %>
+    </button>
+    <%= javascript_tag do %>
+        $("a.launch-assistance-modal").each(function() {
+            $(this).click(function (event) {
+                event.preventDefault();
+                $.get($(this).attr("href"), "no_layout", function(data) {
+                    $("#edit-assistance .modal-content").html(data);
+                });
+                $("#edit-assistance").modal({});
+            });
+        });
+    <% end %>
+<% end %><br />
+
+
+<!-- Modal -->
+<div class="modal fade" id="new-assistance" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><%=t :new_assistance %></h4>
+            </div>
+            <%= bootstrap_horizontal_form_for [@organization, @new_assistance], :method => "POST" do |f| %>
+                <div class="modal-body">
+
+                    <%= f.fields_for :user do |u| %>
+                        <% label_col = 3
+                           field_col = 7 %>
+                        <div class="form-group">
+                            <%= u.label :email, :col_sm => label_col %>
+                            <%= u.text_field :email, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :first_name, :col_sm => label_col %>
+                            <%= u.text_field :first_name, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :last_name, :col_sm => label_col %>
+                            <%= u.text_field :last_name, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :date_of_birth, :col_sm => label_col %>
+                            <%= u.date_select :date_of_birth, {:start_year => Time.now.year - 100, :end_year => Time.now.year}, :col_sm => field_col, :style => "display: inline; width: 32%;" %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :username, :col_sm => label_col %>
+                            <%= u.text_field :username, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :addr_street, :col_sm => label_col %>
+                            <%= u.text_field :addr_street, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :addr_postcode, :col_sm => label_col %>
+                            <%= u.text_field :addr_postcode, :col_sm => label_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :addr_city, :col_sm => label_col %>
+                            <%= u.text_field :addr_city, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :country, :col_sm => label_col %>
+                            <%= u.country_select :country, :col_sm => field_col %>
+                        </div>
+                        <div class="form-group">
+                            <%= u.label :phone_number, :col_sm => label_col %>
+                            <%= u.text_field :phone_number, :col_sm => field_col %>
+                        </div>
+
+                    <% end %>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <%= f.submit t :create_assistance %>
+                </div>
+            <% end %>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="edit-assistance" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

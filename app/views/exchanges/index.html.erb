@@ -1,0 +1,478 @@
+<div style="height:300px; border-bottom: 2px solid #202d3b; position: relative; top: 0; left: 0;">
+    <div id="googlemap" style="width: 100%; height: 100%; display:block"></div>
+    <input type="hidden" id="latLng" />
+    <input type="hidden" id="lat" />
+    <input type="hidden" id="lng" />
+    <div id="info" style="display:none;"></div>
+    <div  class="container" style="position: relative; top: -300px; left: 0;">
+    <div style="opacity:.95; position: absolute; top: 25px; width: 30%; right: 0; z-index: 100; background-color: #ecf0f1; border: 2px solid rgb(173, 173, 173); border-radius: 6px; padding: 20px;">
+    <%= bootstrap_horizontal_form_for :search, :url => exchanges_path, :html => {:id => "search_form"} do |f| %>
+        <% label_col = "col-sm-3"
+           field_col = 8 %>
+
+        <div class="form-group">
+          <%= f.label :text, :class => label_col %>
+          <%= f.text_field :text, :col_sm => field_col, :class => "launch-search", :placeholder => t(:search_place_holder) %>
+        </div>
+        <a href="#" id="btn_search"><%= t(:show_advanced_search) %></a><br /><br />
+
+        <div id="advanced_search" style="display:none">
+
+
+          <div class="form-group">
+            <%= f.label :quantity, :class => label_col %>
+            <%= f.text_field :quantity, :col_sm => field_col, :class => "launch-search" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :is_offer, :class => label_col %>
+            <%= f.check_box :is_offer, :col_sm => field_col, :class => "launch-search" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :is_demand, :class => label_col %>
+            <%= f.check_box :is_demand, :col_sm => field_col, :class => "launch-search" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :start, :class => label_col %>
+            <%= f.text_field :start, :col_sm => field_col, :class => "launch-search", "data-behaviour" => "datepicker" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :end, :class => label_col %>
+            <%= f.text_field :end, :col_sm => field_col, :class => "launch-search", "data-behaviour" => "datepicker" %>
+          </div>
+        </div>
+
+    <% end %>
+    </div>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var form = $("form");
+        form.submit(function(e) {
+            e.preventDefault();
+        });
+
+        $("#btn_search").click(function() {
+            $('#advanced_search').slideToggle(200, function() {
+                $("#btn_search").text($(this).is(':visible') ? "<%= t(:hide_advanced_search) %>": "<%= t(:show_advanced_search) %>");
+            });
+        });
+
+    });
+</script>
+
+<br /><br />
+
+
+
+        <div class="container">
+
+        <%= link_to t(:create_exchange), new_exchange_path, :class => "btn btn-primary pull-right" %>
+
+<div id="display" >
+
+  <h1><%=t :exchanges %></h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= will_paginate @exchanges, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <% @exchanges.each_with_index  do |exchange, index| %>
+          <%= render "exchange_result", :exchange => exchange, :index => index %>
+          <div class="line-break">&nbsp;</div>
+      <% end %>
+
+      <input type="hidden" id="total" value="<%= @exchanges.count() %>" />
+    </div>
+  </div>
+
+</div>
+
+        </div>
+
+<script type="text/javascript"
+        src="http://www.google.com/jsapi?autoload={'modules':[{name:'maps',version:3,other_params:'sensor=false'}]}"></script>
+<script>
+    function getDistance(lat1, lng1, lat2, lng2) {
+        var R = 6371; // Radius of the Earth in km
+        var dLat = (lat2 - lat1) * Math.PI / 180;
+        var dLon = (lng2 - lng2) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d;
+    }
+</script>
+
+<script type="text/javascript">
+    var default_location = "50.66147617162722,4.583488251562471";
+    var default_lat = 50.66147617162722;
+    var default_lng = 4.583488251562471;
+    var default_distance = 10;
+    var curr_pos;
+    var markersArray = [];
+    var counter = 0;
+
+    function init() {
+        // Try W3C Geolocation (Preferred)
+        if(navigator.geolocation) {
+            initialLocation =  navigator.geolocation.getCurrentPosition(function(position) {
+                initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                loadMap(position.coords.latitude, position.coords.longitude);
+            }, function() {
+                initialLocation = new google.maps.LatLng(default_location);
+                loadMap(default_lat, default_lng);
+            });
+        }
+        else {
+            new google.maps.LatLng(default_location);
+            loadMap(default_lat, default_lng);
+        }
+    }
+
+    function loadMap(lat, lng) {
+        var map = new google.maps.Map(document.getElementById("googlemap"), {
+            center: new google.maps.LatLng(lat, lng),
+            zoom: 8,
+            mapTypeId: 'roadmap',
+            scrollwheel: false
+        });
+
+        var distanceWidget = new DistanceWidget(map);
+
+        google.maps.event.addListener(distanceWidget, 'distance_changed', $.throttle( 250, function() {
+            // update distance default
+            default_distance = distanceWidget.get('distance');
+            displayInfo(distanceWidget);
+            loadInfo(distanceWidget, map);
+            updateData(distanceWidget, map);
+            //console.log("Change distance");
+        }));
+
+        google.maps.event.addListener(distanceWidget, 'position_changed', $.throttle( 250,function() {
+            displayInfo(distanceWidget);
+            loadInfo(distanceWidget, map);
+            updateData(distanceWidget, map);
+            //console.log("Change position");
+        }));
+
+        google.maps.event.addListener(map, 'idle', function() {
+            loadInfo(distanceWidget, map);
+            ajaxFunction = function() {
+                console.log("Change!");
+                var values = $("#search_form input[type!=hidden]").serialize();
+                var location = curr_pos.ob + "," + curr_pos.pb;
+
+                $.ajax({
+                    url: "<%= exchanges_path %>",
+                    data: "no_layout=true&location=" + location + "&distance=" +default_distance + "&"+values,
+                    success: function(data) {
+                        $("#display").html(data);
+                    }
+                }).done(function() {
+                            loadInfo(distanceWidget, map);
+                        });
+            };
+
+            $(".launch-search").keyup(ajaxFunction)
+                    //.keypress(ajaxFunction)
+                    .change(ajaxFunction);
+        });
+    }
+
+
+
+    function placeMarker(location, map, title, id) {
+        // first remove all markers if there are any
+        //deleteOverlays();
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: '<a href="#">' + title + '</a>'
+        });
+
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+        var contentString = '<div style="padding:10px;"><a href="exchanges/' + id + '">' + title + '</a></div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+        });
+
+        // add marker in markers array
+        markersArray.push(marker);
+    }
+
+    // Deletes all markers in the array by removing references to them
+    function deleteOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', init);
+</script>
+
+<script type="text/javascript">
+    /**
+     * A distance widget that will display a circle that can be resized and will
+     * provide the radius in km.
+     *
+     * @param {google.maps.Map} map The map on which to attach the distance widget.
+     *
+     * @constructor
+     */
+    function DistanceWidget(map) {
+        this.set('map', map);
+        this.set('position', map.getCenter());
+
+        // update current lat lng - run only ONCE
+        if (counter == 0)
+            curr_pos = map.getCenter().ob + ',' + map.getCenter().pb;
+
+        counter++;
+
+        var marker = new google.maps.Marker({
+            draggable: true,
+            title: 'Move me!'
+        });
+
+        // Bind the marker map property to the DistanceWidget map property
+        marker.bindTo('map', this);
+
+        // Bind the marker position property to the DistanceWidget position
+        // property
+        marker.bindTo('position', this);
+
+
+        // Create a new radius widget
+        var radiusWidget = new RadiusWidget();
+
+        // Bind the radiusWidget map to the DistanceWidget map
+        radiusWidget.bindTo('map', this);
+
+        // Bind the radiusWidget center to the DistanceWidget position
+        radiusWidget.bindTo('center', this, 'position');
+
+        // Bind to the radiusWidgets' distance property
+        this.bindTo('distance', radiusWidget);
+
+        // Bind to the radiusWidgets' bounds property
+        this.bindTo('bounds', radiusWidget);
+    }
+    DistanceWidget.prototype = new google.maps.MVCObject();
+
+
+    /**
+     * A radius widget that add a circle to a map and centers on a marker.
+     *
+     * @constructor
+     */
+    function RadiusWidget() {
+        var circle = new google.maps.Circle({
+            strokeWeight: 2
+        });
+
+        // Set the distance property value, default to 50km.
+        this.set('distance', default_distance);
+
+        // Bind the RadiusWidget bounds property to the circle bounds property.
+        this.bindTo('bounds', circle);
+
+        // Bind the circle center to the RadiusWidget center property
+        circle.bindTo('center', this);
+
+        // Bind the circle map to the RadiusWidget map
+        circle.bindTo('map', this);
+
+        // Bind the circle radius property to the RadiusWidget radius property
+        circle.bindTo('radius', this);
+
+
+        /**
+         * Add the sizer marker to the map.
+         *
+         * @private
+         */
+        RadiusWidget.prototype.addSizer_ = function() {
+            var sizer = new google.maps.Marker({
+                draggable: true,
+                title: 'Drag me!'
+            });
+
+            sizer.setIcon('https://developers.google.com/maps/articles/mvcfun/resize-off.png');
+
+            sizer.bindTo('map', this);
+            sizer.bindTo('position', this, 'sizer_position');
+
+            var me = this;
+            google.maps.event.addListener(sizer, 'drag', function() {
+                // Set the circle distance (radius)
+                me.setDistance();
+            });
+        };
+
+        this.addSizer_();
+
+
+        /**
+         * Update the center of the circle and position the sizer back on the line.
+         *
+         * Position is bound to the DistanceWidget so this is expected to change when
+         * the position of the distance widget is changed.
+         */
+        RadiusWidget.prototype.center_changed = function() {
+            var bounds = this.get('bounds');
+
+            // Bounds might not always be set so check that it exists first.
+            if (bounds) {
+                var lng = bounds.getNorthEast().lng();
+
+                // Put the sizer at center, right on the circle.
+                var position = new google.maps.LatLng(this.get('center').lat(), lng);
+                this.set('sizer_position', position);
+            }
+        };
+
+
+        /**
+         * Calculates the distance between two latlng locations in km.
+         * @see http://www.movable-type.co.uk/scripts/latlong.html
+         *
+         * @param {google.maps.LatLng} p1 The first lat lng point.
+         * @param {google.maps.LatLng} p2 The second lat lng point.
+         * @return {number} The distance between the two points in km.
+         * @private
+         */
+        RadiusWidget.prototype.distanceBetweenPoints_ = function(p1, p2) {
+            if (!p1 || !p2) {
+                return 0;
+            }
+
+            var R = 6371; // Radius of the Earth in km
+            var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
+            var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) *
+                            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c;
+            return d;
+        };
+
+
+        /**
+         * Set the distance of the circle based on the position of the sizer.
+         */
+        RadiusWidget.prototype.setDistance = function() {
+            // As the sizer is being dragged, its position changes.  Because the
+            // RadiusWidget's sizer_position is bound to the sizer's position, it will
+            // change as well.
+            var pos = this.get('sizer_position');
+            var center = this.get('center');
+            var distance = this.distanceBetweenPoints_(center, pos);
+
+            // Set the distance property for any objects that are bound to it
+            this.set('distance', distance);
+        };
+    }
+    RadiusWidget.prototype = new google.maps.MVCObject();
+
+
+    /**
+     * Update the radius when the distance has changed.
+     */
+    RadiusWidget.prototype.distance_changed = function() {
+        this.set('radius', this.get('distance') * 1000);
+    };
+
+    function displayInfo(widget) {
+        var info = document.getElementById('info');
+        info.innerHTML = 'Position: ' + widget.get('position') + ', distance: ' +
+                widget.get('distance');
+    }
+
+    function loadInfo(widget, map) {
+        // first remove all markers if there are any
+        deleteOverlays();
+
+        // update current position
+        curr_pos = widget.get('position');
+
+
+        // get total records
+        total = $("#total").attr("value");
+
+        // for each exchange
+        for (i = 0; i < total; i++) {
+            // distance tag
+            var tmp = $("#current-" + i);
+            // exchange location tag
+            var location = $("#location-" + i).html();
+            // exchange title, use for markers
+            var title = $("#" + i).html();
+            // current id
+            var id = $("#current-id-" + i).html();
+            // current position latitude
+            var lat = curr_pos.ob;
+            // current position longitude
+            var lng = curr_pos.pb;
+
+            // check null
+            if (location != null && location != '') {
+                // calculate distance between current position and exchange
+                var distance = getDistance(lat, lng, location.split(',')[0], location.split(',')[1]);
+                // update the distance back to HTML
+                tmp.attr("value", distance);
+
+                // create markers only if <= default distance (e.g: 20 km)
+                if (distance <= default_distance) {
+                    newlocation = new google.maps.LatLng(location.split(',')[0], location.split(',')[1]);
+                    placeMarker(newlocation, map, title, id);
+                }
+            }
+        }
+    }
+
+    // This function will update the display data based on the distance / position changed in the radius map
+    function updateData(widget, map) {
+        // current distance radius
+        // ajax load
+        var lat = widget.get('position').ob;
+        var lng = widget.get('position').pb;
+        var location = lat + ',' + lng;
+
+        var values = $("#search_form input[type!=hidden]").serialize();
+        $.ajax({
+            url: "<%= exchanges_path %>",
+            data: "no_layout=true&"+values+"&location="+location+"&distance="+default_distance,
+            success: function(data) {
+                $("#display").html(data);
+                loadInfo(widget, map);
+            }
+        }).done(function() {
+                    console.log("Update done!");
+                    loadInfo(widget, map);
+                });
+    }
+
+</script>

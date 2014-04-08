@@ -1,0 +1,234 @@
+fr:
+  fr: Français
+  browse: Parcourir
+  home: Accueil
+  register_as_user: Nouvel utilisateur
+  register_as_organization: Nouvelle organisation
+  sign_in: Connexion
+  sign_out: Déconnexion
+  edit_account: Modifier mon compte
+  blank_password: (Laissez le champ vide si vous ne désirez pas modifier votre mot de passe)
+  remember_me: Se souvenir de moi
+  you: Vous
+  your_organization: Votre organisation
+  new_organization: Créer une nouvelle organisation
+  new_organization_button: Créer l'organisation
+  edit_organization: Editer l'organisation
+  edit_organization_button: Enregistrer
+  add_member: Ajouter ou inviter un membre
+  comment_created: Votre commentaire a bien été créé.
+  comment_deleted: Votre commentaire a bien été supprimé.
+  proposal_created: Votre proposition a bien été créé.
+  proposal_deleted: Votre proposition a bien été supprimé.
+  exchange_created: Votre échange a bien été créé.
+  exchange_deleted: Votre échange a bien été supprimé.
+  exchange_updated: Votre échange a bien été modifié.
+  not_the_owner: Vous n'êtes pas l'auteur de cet échange.
+  edit_membership: Sauvegarder le membre
+  delete_membership: Supprimer le membre
+  close: Fermer
+  user_email: Email
+
+  failed_form: ont empêché d'enregistrer votre inscription
+  thanks_to_correct: Merci de corriger ces champs
+
+  new_exchange_button: Envoyer
+  create_exchange: Créer un échange
+  new_exchange: Nouvel échange
+  no_type_error: Vous devez choisir au moins un type d'échange
+  list_exchange: Echanges
+  exchange_type: Type
+
+  organization_error: Vous n'avez pas les droits nécessaires.
+  organization_updated: L'organisation a bien été modifiée.
+  organization_created: L'organisation a bien été créée.
+
+  organizations: Organisations
+  all_organizations: Toutes les organisations
+  none_organizations: Aucune
+  people_in_need: Personnes à aider
+  list_organizations: Organisations
+  create_organization: Créer une nouvelle organisation
+  manage_this_organization: Gérér l'organisation sélectionnée
+  ask_to_join: Demande à joindre
+
+  forgot_password: Mot de passe oublié?
+  send_password: Envoyer les instructions de récupération
+
+  members: Membres
+  admin: Admin
+  founder: Fondateur
+  name: Nom
+  address: Adresse
+  addr_street: Adresse
+  addr_postcode: Code postal
+  addr_city: Ville
+  phone_number: Numéro de téléphone
+  site_url: Site web
+  facebook_url: Profil Facebook
+  nl: Néerlandais
+
+  exchanges: Echanges
+  title: Titre
+  start: Date de lancement
+  end: Date de cloture
+  city: Ville
+  country: Pays
+  description: Description
+  is_offer: Offre
+  is_demand: Demande
+  quantity: Quantité
+  both_exchange: Offre et Demande
+  edit_exchange_button: Editer
+  editing_exchange: Edition de l'échange
+  both_exchange: Offre et Demande
+  first_name: Prénom
+  last_name: Nom
+  password: Mot de passe
+  password_confirmation: Mot de passe (confirmation)
+  current_password: Mot de passe actuel
+  date_of_birth: Date de naissance
+  username: Pseudo
+  addr_street: Adresse
+  addr_postcode: Code postal
+  addr_city: Ville
+  phone_number: Numéro de téléphone
+  id_card: Scan de votre carte d'identité
+  email: Email
+  members_count: {
+    zero: '0 membre',
+    one: '1 membre',
+    other: '%{count} membres'
+  }
+  people_in_need_count: {
+    zero: '0 personne gérée',
+    one: '1 personne gérée',
+    other: '%{count} personnes gérées'
+  }
+  sign_up: Inscription
+  activerecord:
+    attributes:
+      user:
+          first_name: Prénom
+          last_name: Nom
+          password: Mot de passe
+          password_confirmation: Mot de passe (confirmation)
+          current_password: Mot de passe actuel
+          date_of_birth: Date de naissance
+          username: Pseudo
+          addr_street: Adresse
+          addr_postcode: Code postal
+          addr_city: Ville
+          phone_number: Numéro de téléphone
+          id_card: Scan de votre carte d'identité
+          avatar: Avatar
+          country: Pays
+          email: Email
+      organization:
+          name: Nom
+          addr_street: Adresse
+          addr_postcode: Code postal
+          addr_city: Ville
+          phone_number: Numéro de téléphone
+          site_url: Site web
+          facebook_url: Profil Facebook
+          description: Description
+          email: Email
+      exchange:
+          title: Titre
+          quantity: Quantité
+          is_offer: Offre
+          is_demand: Demande
+          start: Date de lancement
+          end: Date de cloture
+          city: Ville
+          country: Pays
+          description: Description
+
+  # search box in exchange
+  search_place_holder: Entrer l'échange ici...
+  or_goto_advanced_search: Recherche avancée disponible
+  advanced_search_title: Recherche avancée
+
+  # exchange error messages
+  exchange_error_required_title: S'il vous plaît, entrez au moins la requête (titre) de l'échange!
+
+  # general form action
+  edit: Modifier
+  delete: Supprimer
+  is_visible: Public
+
+  # proposal-related translation
+  proposals: Les propositions
+  new_proposal: Nouvelle proposition
+  new_proposal_button: Créer une proposition
+
+  proposals: Les propositions
+
+  #contact
+  facebook_url: Profile facebook
+  facebook_page: Page facebook
+  gmail_address: Adresse Gmail
+  contact_message: Pour nous contacter, voici quelques informations utiles
+  contact_us: Contactez nous
+  #about
+  about_text01: Ce site web a été créé par un groupe d'étudiants de l'université de Louvain-la-Neuve pour le cours de SINF2255
+  about_text02: Ce site web offre un service permettant au gens de faire des échanges ou des dons
+  project_licence: License du projet
+  about_title: A propos de nous
+
+# date time format
+  date:
+    formats:
+      default: "%B %d, %Y"
+  # page/home
+  last_exchanges: Les derniers échanges
+  recently_joined_users: Les utilisateurs récemments inscrits
+  exchange_express: Les échanges formulés
+  author: Auteur
+  exchange: Echange
+  end_time: Date de fin
+  title_home01: Prenez un peu de temps
+  title_home02: pour donner un peu d'amour
+  number: Nombre
+  my_profil: Mon profil
+  about: A propos de
+  contact: Contact
+
+  #profil/page
+  avatar: Avatar
+  full_name: Nom complet
+  exchanges_count: Tous mes échanges
+  proposals_count: Toute mes propositions
+  last_comments: Les 10 derniers commentaires
+
+  #Exchanges page
+  see_details: Voir les détails
+  by : par
+  creation_date: Date de création
+  modification_date: Date de modification
+  category: Catégorie
+  lbl_by: par
+  save_comment: Sauvegarder
+  lbl_status: Statut
+  add_people_in_need: Ajout d'une personne dans le besoin
+  click_here: Cliquez ici
+  proposal_on: Proposition sur
+
+  #organisation page
+  edit_this_organization: Modifier cette organisation
+  none_people_in_need: Aucune personne dans le besoin
+  create_assistance: Créer une assistance
+  new_assistance: Nouvelle assistance
+
+  show_advanced_search: Montrer la recherche avancée
+  title: Titre
+  user_email: Email utilisateur
+  user_id: Id utilisateur
+  addr_city: Ville
+  addr_postcode: Code postal
+  addr_street: Rue
+  description: Description
+  email: Email
+  validation_sent: Demande envoyée
+  requests: Demandes à joindre

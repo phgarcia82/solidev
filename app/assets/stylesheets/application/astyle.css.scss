@@ -1,0 +1,50 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#absolute-center {
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 70px;
+}
+
+#notice, #alert {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  position: relative;
+  top: -5px;
+  left: -150px;
+  border-radius: 5px;
+}
+
+.navbar-avatar {
+  height: 25px;
+  position: relative;
+  top: -3px;
+  margin-right: 7px;
+  border-radius: 3px;
+  float: left;
+}
+
+.form-horizontal .control-label {
+  padding-top: 5px;
+}
+
+.search_box {
+  width: 200px;
+}
+
+.line-break {
+  margin-top:10px;
+  margin-bottom: 10px;
+  height:1px;
+  background: #e6e6e6;
+}

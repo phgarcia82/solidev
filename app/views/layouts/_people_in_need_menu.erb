@@ -1,0 +1,27 @@
+<% if !@menu_people_in_need.nil? %>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <% if @current_person_in_need.nil? %>
+              <%= t(:people_in_need) %>
+          <% else %>
+              <%= @current_person_in_need.full_name %>
+          <% end %><b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+          <% @menu_people_in_need.each do |p| %>
+              <li><%= link_to rewrite_current_with_person_in_need(p) do %>
+                      <%= p.full_name %>
+                      <% if p == @current_person_in_need %>
+                        &nbsp;&nbsp;<i class="fa fa-check"></i>
+                      <% end %>
+              <% end %></li>
+          <% end %>
+          <li><%= link_to rewrite_current_with_person_in_need(nil) do %>
+                  <%=t :none_people_in_need %>
+                  <% if @current_person_in_need.nil? %>
+                      &nbsp;&nbsp;<i class="fa fa-check"></i>
+                  <% end %>
+          <% end %></li>
+      </ul>
+    </li>
+<% end %>

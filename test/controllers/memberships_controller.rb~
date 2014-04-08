@@ -1,0 +1,40 @@
+class MembershipsController < ApplicationController
+  def create
+    @organization = Organization.find(params[:organization_id])
+
+    if @organization.has_member? current_user
+      @membership = @organization.memberships.new(params[:membership].permit(:user_email))
+      @membership.validated = true
+      @membership.save
+    else # NOT A MEMBER
+      @membership = @organization.memberships.new(:user => current_user, :validated => false)
+      @membership.save
+    end
+
+    redirect_to @organization
+  end
+
+  def edit
+    @organization = Organization.find(params[:organization_id])
+    if @organization.has_member? current_user
+      @membership = @organization.memberships.find(params[:id])
+    end
+  end
+
+  def update
+    @organization = Organization.find(params[:organization_id])
+    if @organization.has_member? current_user
+      @membership = @organization.memberships.find(params[:id], :readonly => false)
+      # TODO: check
+      @membership.update(params[:membership].permit!)
+    end
+    redirect_to @organization
+  end
+
+  def destroy
+    @organization = Organization.find(params[:organization_id])
+    @membership = @organization.memberships.find(params[:id], :readonly => false)
+    @membership.destroy
+    redirect_to @organization
+  end
+end

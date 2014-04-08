@@ -1,0 +1,74 @@
+<script>
+    $.backstretch("<%= image_path "home.jpg" %>");
+</script>
+
+<div>
+    <div>
+        <h1 style="text-shadow: 5px 5px 5px rgba(000,000,000,0.2); color: rgb(245,245,245); font-style: italic; font-size: 64px; line-height: 64px; text-align:center;">
+            <%= t :title_home01 %><br />
+            &nbsp;&nbsp;&nbsp;<%= t :title_home02 %>
+        </h1>
+        <br />
+        <div style="display: table; margin-left: auto; margin-right: auto; border-collapse:separate; border-spacing: 15px; opacity: 0.8;"><div style="display: table-row;">
+            <div class="well" style="width:30%; display: table-cell; vertical-align:top;">
+                <div style="margin-top:0px;">
+                    <h1 style= "font-style:italic;"><%= t :last_exchanges %></h1><br />
+                </div>
+                <table class="table table-hover">
+
+                    <tr>
+                        <th><%= t :author %></th>
+                        <th><%= t :exchange %></th>
+                    </tr>
+                    <% Exchange.last(5).reverse.each do |last_show|%>
+                        <tr>
+                            <td><a href="#"><%= link_to owner_name(last_show), owner_link(last_show) %></a></td>
+                            <td><a href="#"><%= link_to last_show.title, last_show %></a></td>
+                        </tr>
+                    <% end %>
+                </table>
+            </div>
+            <div class="well" style="width:30%; display: table-cell; vertical-align:top;">
+                <h1 style= "font-style:italic;"> <%= t :recently_joined_users %> </h1><br />
+                <table class="table table-hover">
+                    <tr>
+                        <th><%= t :username %></th>
+                    </tr>
+                    <% User.last(5).reverse.each do |last_show|  %>
+                        <tr>
+                            <td><a href="#"><%= link_to last_show.displayed_name, last_show %></a></td></a>
+                        </tr>
+                    <% end %>
+                </table>
+            </div>
+
+            <div class="well" style="width:30%; display: table-cell; vertical-align:top;">
+                <h1 style= "font-style:italic;"> <%= t :exchange_express %> </h1><br />
+                <table class="table table-hover">
+                    <tr>
+                        <th><%= t :author %></th>
+                        <th><%= t :title %></th>
+                        <th> <%= t :end_time %></th>
+                    </tr>
+                    <%
+                       ((Exchange.order("\"end\" ASC")).where("\"end\" > ? AND start < ? AND status_cd = 0", Date.today,Date.today)).limit(5).each do |last_show|
+
+                    %>
+                        <tr>
+                            <td><a href="#"><%= link_to owner_name(last_show), owner_link(last_show) %></a></td>
+                            <td><a href="#"><%= link_to last_show.title, last_show %></a></td>
+                            <td><%= last_show.end %></td>
+
+
+                        </tr>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+

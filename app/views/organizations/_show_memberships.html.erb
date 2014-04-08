@@ -1,0 +1,81 @@
+<i class="fa fa-users"></i>&nbsp;&nbsp;
+<%=t :members_count, count: @memberships.count %><br />
+<hr style="margin-top: 5px;" />
+
+<% @memberships.each do |m| %>
+    <% if @organization.has_admin? current_user %>
+        <%= link_to edit_organization_membership_path(@organization, m), :class => "launch-membership-modal" do %><i class="fa fa-pencil text-primary"></i><% end %>&nbsp;
+    <% end %>
+    <%= m.user.full_name %>&nbsp;
+    <% if m.admin? %>
+        <span class="label label-primary"><%=t :admin %></span>
+    <% end %>
+    <% if m.founder? %>
+        <span class="label label-warning"><%=t :founder %></span>
+    <% end %>
+    <br />
+<% end %>
+
+<%= javascript_tag do %>
+    $("a.launch-membership-modal").each(function() {
+        $(this).click(function (event) {
+            event.preventDefault();
+            $.get($(this).attr("href"), "no_layout", function(data) {
+                $("#edit-membership .modal-content").html(data);
+            });
+        $("#edit-membership").modal({});
+        });
+    });
+<% end %>
+
+<% if !@organization.has_member? current_user %><br /><br />
+    <% if !@organization.waiting_for_validation? current_user %>
+        <%= link_to t(:ask_to_join), organization_memberships_path(@organization), :method => "POST", :class => "btn btn-primary btn-sm" %>
+    <% else %>
+        <%=t :validation_sent %>
+    <% end %>
+<% end %><br />
+
+<div class="modal fade" id="edit-membership" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<% if @organization.has_admin? current_user %>
+    <strong><%=t :add_member %></strong><br />
+
+    <%= bootstrap_horizontal_form_for [@organization, @new_membership] do |f| %>
+        <div class="form-group" style="margin: 0;">
+            <%= f.label :user_email, :col_sm => nil %>&nbsp;&nbsp;
+            <%= f.text_field :user_email, :col_sm => nil, :class => "twitter-typeahead form-control" %>&nbsp;&nbsp;
+            <a href="#" onclick="$(this).closest('form').submit()" class="text-primary"><li class="fa fa-plus"></li></a>
+        </div>
+    <% end %>
+    <%= javascript_tag do %>
+        $(function() {
+            $("#membership_user_email").typeahead({
+                name: "email",
+                remote: {
+                    url: "/users/?q=%QUERY",
+                    filter: function(respData) {
+                        var emails = respData.map(function(e) { return e.email; });
+                        return emails;
+                    }
+                }
+            });
+        });
+    <% end %><br />
+
+    <%=t :requests %><br />
+    <% Membership.where(:organization => @organization, :validated => false).each do |m| %>
+        <%= form_for [@organization, m] do |f| %>
+                <%= f.hidden_field :validated, :value => "1" %>
+                <%= link_to m.user.displayed_name, m.user %>
+                <a href="#" onclick="$(this).closest('form').submit()" class="text-primary"><li class="fa fa-plus"></li></a>
+                <%= link_to organization_membership_path(@organization, m), :method => "DELETE", :class => "text-primary" do %><li class="fa fa-minus"></li><% end %>
+        <% end %>
+    <% end %>
+<% end %>

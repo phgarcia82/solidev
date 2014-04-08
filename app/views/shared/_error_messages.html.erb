@@ -1,0 +1,64 @@
+<% if !(@exchange.nil?) && @exchange.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exchange.errors.count, "error") %>
+        <%= t :failed_form %> </h2>
+      <p> <%= t :thanks_to_correct  %> :</p>
+      <ul>
+        <% @exchange.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<% if !(@organization.nil?) && @organization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organization.errors.count, "error") %>
+        <%= t :failed_form %> </h2>
+      <p> <%= t :thanks_to_correct  %> :</p>
+      <ul>
+        <% @organization.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<% if !(@user.nil?) && @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %>
+        <%= t :failed_form %> </h2>
+      <p> <%= t :thanks_to_correct  %> :</p>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<% if !(@proposal.nil?) && @proposal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proposal.errors.count, "error") %>
+        <%= t :failed_form %> </h2>
+      <p> <%= t :thanks_to_correct  %> :</p>
+      <ul>
+        <% @proposal.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<% if !(@membership.nil?) && @membership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@membership.errors.count, "error") %>
+        <%= t :failed_form %> </h2>
+      <p> <%= t :thanks_to_correct  %> :</p>
+      <ul>
+        <% @membership.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
