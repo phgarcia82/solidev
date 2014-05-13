@@ -46,11 +46,11 @@ nl:
   validation_sent: validatie verzonden
   new_exchange_button: Vooruit
   create_exchange: Maak een uitwisseling
-  new_exchange: Niew uitwisseling
+  new_exchange: Nieuwe uitwisseling
   no_type_error: U moet ten minste een soort van uitwisseling te selecteren
   list_exchange: Uitwisseling
-  edit_exchange_button: Uitgeven
-  editing_exchange: Editie van uitwisseling
+  edit_exchange_button: Bewerken
+  editing_exchange: Bewerken van uitwisseling
 
   exchanges: Uitwisselingen
   title: Titel
@@ -79,15 +79,15 @@ nl:
           password: Wachtwoord
           password_confirmation: Wachtwoord (bevestiging)
           date_of_birth: Geboortedatum
-          username: username
-          addr_street: Adress
+          username: Gebruikersnaam
+          addr_street: Adres
           addr_postcode: Postcode
           addr_city: Stad
           phone_number: Telefoonnummer
           id_card: Identiteitskaart
-          avatar: avatar
-          country: land
-          current-password: huidige wachtwoord
+          avatar: Avatar
+          country: Land
+          current-password: Huidige wachtwoord
           email: e-mail
       organization:
           name: Naam
@@ -96,9 +96,9 @@ nl:
           addr_city: Stad
           phone_number: Telefoonnummer
           site_url: Website
-          facebook_url: Facebook profiel
-          description: beschrijving
-          email: e-mail
+          facebook_url: Facebook-profiel
+          description: Beschrijving
+          email: E-mail
       exchange:
                 title: Titel
                 quantity: Hoeveelheid
@@ -134,12 +134,12 @@ nl:
       default: "%d %B %Y"
 
   # contact
-  facebook_url: facebook profiel
-  facebook_page: facebook pagina
-  gmail_address: Gmail adres
-  contact_message: Om ons te contacteren, hier is wat nuttige informatie
-  address: adres
-  contact_us: Contact met ons op
+  facebook_url: Facebook-profiel
+  facebook_page: Facebook-pagina
+  gmail_address: E-mail
+  contact_message: Wat nuttige informatie om ons te contacteren
+  address: Adres
+  contact_us: Contacteer ons
   # about
   about_text01: Deze website is opgericht door een groep studenten van de universiteit van Louvain-la-Neuve voor de cursus SINF2255
   about_text02: Deze website biedt een dienst waarmee mensen om te ruilen of te doneren
@@ -147,15 +147,15 @@ nl:
   about_title: Over ons
 
   # page/home
-  last_exchanges: De laatste handel
-  recently_joined_users: Geregistreerde gebruikers Recenten
-  exchange_express: Ruilen van
+  last_exchanges: Laatste uitwisselingen
+  recently_joined_users: Nieuwe gebruikers
+  exchange_express: Dringende uitwisselingen
   author: Auteur
-  exchange: Uitwisselingen
+  exchange: Uitwisseling
   end_time: Einddatum
   title_home01: Neem de tijd
   title_home02: om wat hulp te geven ...
-  username: gebruikersnaam
+  username: Gebruikersnaam
   organizations: Organisaties
   number: Aantal
   my_profil: Mijn profiel
@@ -164,21 +164,21 @@ nl:
   contact: Contact
 
   #profil_page
-  avatar: avatar
-  full_name: volledige naam
-  date_of_birth: geboortedatum
-  email: e-mail
+  avatar: Avatar
+  full_name: Volledige naam
+  date_of_birth: Geboortedatum
+  email: E-mail
   exchanges_count: Al mijn uitwisselingen
   proposals_count: Al mijn voorstellen
-  last_comments: de laatste 10 reacties
-  none_organizations: geen organisaties
-  all_organizations: alle organisaties
+  last_comments: De laatste 10 reacties
+  none_organizations: Geen organisaties
+  all_organizations: Alle organisaties
 
   #edit profil
-  blank_password: (Laat leeg als u niet wilt dat uw wachtwoord te wijzigen)
+  blank_password: (Laat leeg als u uw wachtwoord niet wenst te wijzigen.)
 
   #all organization
-  members: lid
+  members: Leden
 
   #Exchanges page
   see_details: zie details
@@ -195,14 +195,14 @@ nl:
   people_in_need: mensen in nood
   none_people_in_need: geen mensen in nood
   add_people_in_need: Het toevoegen van mensen in nood
-  edit_this_organization: deze organisatie bewerk
+  edit_this_organization: deze organisatie bewerken
   people_in_need_count: {
     zero: '0 mensen in nood',
-    one: '1 mensen in nood',
+    one: '1 mens in nood',
     other: '%{count} mensen in nood'
   }
   show_advanced_search: Geavanceerd zoeken
-  title: titel
+  title: Titel
   user_email: gebruiker e-mail
   user_id: user id
   addr_city: stad
