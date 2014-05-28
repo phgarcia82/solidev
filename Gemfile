@@ -57,3 +57,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'sunspot_solr'
 end
+
+group :production do
+  gem 'pg'
+end
