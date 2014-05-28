@@ -7,7 +7,7 @@ development:
   username: ph
   password: test
   host: localhost
-  port: 5433
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,14 +20,15 @@ test:
   username: ph
   password: test
   host: localhost
-  port: 5433
+  port: 5432
 
 production:
   adapter: postgresql
+  encoding: unicode
   database: db/production.solidareit
   pool: 5
   timeout: 5000
   username: ph
-  password: solidareit
+  password: test
   host: test
-  port: 5433
+  port: 5432
