@@ -59,5 +59,6 @@ group :test do
 end
 
 group :production do
+  gem 'sendgrid-rails'
   gem 'pg'
 end
