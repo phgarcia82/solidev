@@ -46,6 +46,7 @@ group :development do
   gem 'thin'
   gem 'quiet_assets'
   gem 'sunspot_solr'
+  gem 'sendgrid-rails'
 end
 
 group :test do
@@ -56,6 +57,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'sunspot_solr'
+  gem 'sendgrid-rails'
 end
 
 group :production do
