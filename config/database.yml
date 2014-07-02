@@ -4,8 +4,8 @@ development:
   database: solidareit
   pool: 5
   timeout: 5000
-  username: ph
-  password: test
+  username: postgres
+  password: solidareit
   host: localhost
   port: 5432
 

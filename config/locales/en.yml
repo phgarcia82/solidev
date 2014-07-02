@@ -96,6 +96,7 @@ en:
   both_exchange: Offer and Demand
   edit_exchange_button: Edit
   editing_exchange: Edition of exchange
+  exchange_delete_confirmation: Are you sure you want to delete this exchange?
 
   members_count: {
     one: '1 member',

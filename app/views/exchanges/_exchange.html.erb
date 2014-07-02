@@ -46,6 +46,7 @@
        var markersArray = [];
 
        function initialize() {
+           console.log('initialize');
            var lat = 50.852362;
            var lng = 4.361626;
            var mapOptions = {
@@ -55,12 +56,15 @@
            scrollwheel: false
 
            };
+           console.log('before map');
            map = new google.maps.Map(document.getElementById("googlemap"), mapOptions);
-
+           console.log('after map');
+           console.log(<% @exchange.latitude %>);
            // load marker that has been selected
            <% if action_name == "edit" and !@exchange.latitude.blank? and !@exchange.longitude %>
             // create a marker at the location on the database
            var location = new google.maps.LatLng(<%= @exchange.latitude %>,<%= @exchange.longitude %>);
+           console.log('location set');
            var marker = new google.maps.Marker({
                position: location,
                map: map

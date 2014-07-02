@@ -1,8 +1,8 @@
 
             <div class="well pull-left col-sm-4">
                 <% if is_owner(@exchange) %>
-                    <%= link_to edit_exchange_path(@exchange), :class => "btn btn-primary pull-right" do %><i class="fa fa-pencil"></i> <%= t(:edit) %><% end %>
-                    <%= link_to @exchange, method: :delete, :class => "btn btn-danger pull-right", data: { confirm: t(:delete_confirmation) }, :style => "margin-right: 5px;" do %><i class="fa fa-trash-o"></i> <%= t(:delete) %><% end %>
+                    <%= link_to edit_exchange_path(@exchange), :class => "btn btn-primary pull-right", :title => t(:edit) do %><i class="fa fa-pencil"></i><% end %>
+                    <%= link_to @exchange, method: :delete, :class => "btn btn-danger pull-right", data: { confirm: t(:exchange_delete_confirmation) }, :style => "margin-right: 5px;", :title => t(:delete) do %><i class="fa fa-trash-o"></i><% end %>
                 <% end %>
                 <h2 style="line-height: 24px;"><%= @exchange.title %></h2>
 

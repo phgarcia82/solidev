@@ -125,23 +125,31 @@
     var counter = 0;
 
     function init() {
+
+        console.log('init');
+
         // Try W3C Geolocation (Preferred)
-        if(navigator.geolocation) {
+        if(false && navigator.geolocation) {
+            console.log('w3c');
             initialLocation =  navigator.geolocation.getCurrentPosition(function(position) {
+                clog('success');
                 initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
                 loadMap(position.coords.latitude, position.coords.longitude);
             }, function() {
+                clog('error');
                 initialLocation = new google.maps.LatLng(default_location);
                 loadMap(default_lat, default_lng);
             });
         }
         else {
+            console.log('google maps');
             new google.maps.LatLng(default_location);
             loadMap(default_lat, default_lng);
         }
     }
 
     function loadMap(lat, lng) {
+        console.log('loadMap');
         var map = new google.maps.Map(document.getElementById("googlemap"), {
             center: new google.maps.LatLng(lat, lng),
             zoom: 8,
@@ -412,6 +420,9 @@
     }
 
     function loadInfo(widget, map) {
+
+        console.log('loadInfo');
+
         // first remove all markers if there are any
         deleteOverlays();
 

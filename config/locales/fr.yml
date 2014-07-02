@@ -81,6 +81,7 @@ fr:
   both_exchange: Offre et Demande
   edit_exchange_button: Editer
   editing_exchange: Edition de l'échange
+  exchange_delete_confirmation: Êtes-vous sûr de vouloir supprimer cet échange?
   both_exchange: Offre et Demande
   first_name: Prénom
   last_name: Nom
