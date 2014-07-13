@@ -27,4 +27,5 @@ capybara-*.html
 /tmp
 /public/system
 
-# Ignore database.yml file to void conflict in database configuration
+# Ignore database.yml file to avoid conflict in database configuration
+/config/database.yml
