@@ -1,5 +1,6 @@
 SolidareIt::Application.routes.draw do
 
+  get "devzone/index"
   scope "(:locale)", locale: /en|fr|nl/ do
 
     devise_for :users, :controllers => { :registrations => "registrations" }
