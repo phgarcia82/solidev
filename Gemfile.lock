@@ -216,6 +216,7 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.0.0)
+    recaptcha (0.3.6)
     ref (1.0.5)
     responders (1.1.0)
       railties (>= 3.2, < 5)
@@ -349,6 +350,7 @@ DEPENDENCIES
   rails-i18n
   rails-rateit
   rails-timeago
+  recaptcha
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver

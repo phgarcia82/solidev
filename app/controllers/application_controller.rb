@@ -50,12 +50,12 @@ class ApplicationController < ActionController::Base
     #end
 
     # new user model based on the new requirement
-    [:full_name, :language_spoken, :username, :addr_street, :addr_number, :addr_postcode, :addr_city,
+    [:fullname, :language_spoken, :username, :addr_street, :addr_number, :addr_postcode, :addr_city,
      organizations_attributes: [:name, :email, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :site_url, :facebook_url, :description]].each do |d|
       devise_parameter_sanitizer.for(:sign_up) << d
     end
 
-    [:full_name, :username, :addr_street, :addr_number, :addr_postcode, :addr_city].each do |d|
+    [:fullname, :username, :addr_street, :addr_number, :addr_postcode, :addr_city].each do |d|
       devise_parameter_sanitizer.for(:account_update) << d
     end
   end

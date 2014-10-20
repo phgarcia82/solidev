@@ -55,6 +55,9 @@ gem 'will_paginate-bootstrap'
 gem 'high_voltage'
 gem 'rails-timeago'
 
+# Recaptcha
+gem "recaptcha", :require => "recaptcha/rails"
+
 group :development do
   gem "capistrano"
   gem "capistrano-rvm"

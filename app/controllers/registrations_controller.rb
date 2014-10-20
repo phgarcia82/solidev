@@ -17,6 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>."""
 
 class RegistrationsController < Devise::RegistrationsController
+  # override to add recaptcha
+  def create
+    if verify_recaptcha
+      super
+    else
+      build_resource(sign_up_params)
+      clean_up_passwords(resource)
+      flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
+      flash.delete :recaptcha_error
+      render :new
+    end
+  end
+
   def new
     build_resource({})
     respond_with self.resource
