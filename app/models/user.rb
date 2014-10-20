@@ -28,19 +28,15 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "500x500>", :thumb => "100x100>", :icon => "34x34", :navbar => "25x25" }, :default_url => "missing_avatar_:style.png"
   accepts_nested_attributes_for :organizations
   validates_date :date_of_birth, :before => Time.now
-  validates_presence_of :username
+  validates_presence_of :username, :addr_city
   before_create :set_admin_if_first
 
-
-  def full_name
-    (first_name.nil? ? "" : first_name) + " " + (last_name.nil? ? "" : last_name)
-  end
 
   def displayed_name
     if !username.blank?
       username
     else
-      full_name
+      fullname
     end
   end
 

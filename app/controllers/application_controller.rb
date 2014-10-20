@@ -44,11 +44,18 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    [:first_name, :last_name, :date_of_birth, :username, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :avatar, :id_card,
+    #[:first_name, :last_name, :date_of_birth, :username, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :avatar, :id_card,
+    # organizations_attributes: [:name, :email, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :site_url, :facebook_url, :description]].each do |d|
+    #  devise_parameter_sanitizer.for(:sign_up) << d
+    #end
+
+    # new user model based on the new requirement
+    [:full_name, :language_spoken, :username, :addr_street, :addr_number, :addr_postcode, :addr_city,
      organizations_attributes: [:name, :email, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :site_url, :facebook_url, :description]].each do |d|
       devise_parameter_sanitizer.for(:sign_up) << d
     end
-    [:first_name, :last_name, :date_of_birth, :username, :addr_street, :addr_number, :addr_postcode, :addr_city, :phone_number, :avatar, :facebook_url].each do |d|
+
+    [:full_name, :username, :addr_street, :addr_number, :addr_postcode, :addr_city].each do |d|
       devise_parameter_sanitizer.for(:account_update) << d
     end
   end
