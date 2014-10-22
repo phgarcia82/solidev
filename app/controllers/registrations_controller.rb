@@ -35,6 +35,14 @@ class RegistrationsController < Devise::RegistrationsController
     respond_with self.resource
   end
 
+  def create_account
+    
+  end
+
+  def new_with_user
+    new()
+  end
+
   def new_with_organization
     new()
   end

@@ -29,8 +29,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <% if !user_signed_in? %>
-                        <%= active_link_to t(:register_as_user), new_user_registration_path, :wrap_tag => :li %>
-                        <%= active_link_to t(:register_as_organization), new_user_with_organization_registration_path, :wrap_tag => :li %>
+                        <%= active_link_to t(:register), users_create_account_path, :wrap_tag => :li %>
                     <% else %>
                       <%= #render 'layouts/exchanges_menu'
                           active_link_to t(:exchanges), exchanges_path, :wrap_tag => :li %>

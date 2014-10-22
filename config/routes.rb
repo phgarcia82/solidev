@@ -1,11 +1,12 @@
 SolidareIt::Application.routes.draw do
 
-  get "devzone/index"
   scope "(:locale)", locale: /en|fr|nl/ do
+    get "devzone/index"
 
     devise_for :users, :controllers => { :registrations => "registrations" }
     devise_scope :user do
       get "users/sign_up_with_organization", :to => "registrations#new_with_organization", :as => "new_user_with_organization_registration"
+      get "users/create_account", :to => "registrations#create_account", :as => "users_create_account"
     end
 
 
