@@ -1,0 +1,27 @@
+<div class="form-group">
+  <%= f.label :fullname, :col_sm => label_col %>
+  <%= f.text_field :fullname, :col_sm => field_col %>
+</div>
+
+<div class="form-group">
+  <%= f.label :email, :col_sm => label_col %>
+  <%= f.email_field :email, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :password, :col_sm => label_col %>
+  <%= f.password_field :password, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :password_confirmation, :col_sm => label_col %>
+  <%= f.password_field :password_confirmation, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label :username, :col_sm => label_col %>
+  <%= f.text_field :username, :col_sm => field_col %>
+</div>
+<div class="form-group">
+  <%= f.label 'Captcha', :col_sm => label_col %>
+  <div class="col-sm-<%= field_col%>">
+    <%= recaptcha_tags %>
+  </div>
+</div>

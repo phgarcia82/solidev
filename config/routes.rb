@@ -3,10 +3,12 @@ SolidareIt::Application.routes.draw do
   scope "(:locale)", locale: /en|fr|nl/ do
     get "devzone/index"
 
+
     devise_for :users, :controllers => { :registrations => "registrations" }
     devise_scope :user do
       get "users/sign_up_with_organization", :to => "registrations#new_with_organization", :as => "new_user_with_organization_registration"
       get "users/create_account", :to => "registrations#create_account", :as => "users_create_account"
+      post "users/create_organisation", :to => "registrations#create_organisation", :as => "create_organisation_account"
     end
 
 
@@ -23,7 +25,6 @@ SolidareIt::Application.routes.draw do
       end
     end
 
-
     resources :organizations do
       base()
       resources :memberships
@@ -36,7 +37,6 @@ SolidareIt::Application.routes.draw do
     base()
     root 'pages#show', id: 'home'
   end
-  ActiveAdmin.routes(self)
 
 
   # The priority is based upon order of creation: first created -> highest priority.

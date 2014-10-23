@@ -13,7 +13,7 @@
         <div class="col-sm-5">
             <legend><%=t :your_organization %></legend>
 
-          <%= f.fields_for "organizations", resource.organizations.new do |o| %>
+          <%= f.fields_for "organization", resource.organizations.new do |o| %>
                 <%= render :partial => "organization", :locals => { :f => o, :label_col => 4, :field_col => 8 } %>
             <% end %>
         </div>

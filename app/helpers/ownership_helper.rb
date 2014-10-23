@@ -33,7 +33,7 @@ module OwnershipHelper
     if !resource.person_in_need.nil?
       return resource.person_in_need.full_name
     elsif !resource.organization.nil?
-      return resource.organization.name
+      return resource.organization.organisation_name
     elsif !resource.user.nil?
       return resource.user.displayed_name
     else

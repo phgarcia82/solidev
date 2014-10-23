@@ -20,6 +20,13 @@ class RegistrationsController < Devise::RegistrationsController
   # override to add recaptcha
   def create
     if verify_recaptcha
+      # here we process two cases: organisation and personal account
+      if params[:user][:organization].blank?
+        # personal account, nothing special here
+      else
+        # this is an organisation. then first we need to assign addr_city to user to come over the constraint
+      end
+
       super
     else
       build_resource(sign_up_params)
@@ -44,8 +51,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def new_with_organization
-    puts "Hello Org"
-    #new()
+    new()
   end
 
   def update
@@ -65,5 +71,15 @@ class RegistrationsController < Devise::RegistrationsController
     else
       render "edit"
     end
+  end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params[:user]
+  end
+
+  def organisation_params
+    params[:user][:organization]
   end
 end

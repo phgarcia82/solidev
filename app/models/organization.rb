@@ -23,7 +23,7 @@ class Organization < ActiveRecord::Base
   has_many :people_in_need, :through => :assistances, :source => :user
   has_attached_file :logo, :styles => { :medium => "500x500>", :thumb => "100x100>", :icon => "34x34", :navbar => "25x25" }, :default_url => "missing_logo_:style.png"
   after_commit :set_first_user_as_founder, :on => :create
-  validates_presence_of :name, :email, :description
+  validates_presence_of :organisation_name, :addr_city
   validates :description, length: {minimum: 10}
 
   def set_first_user_as_founder
