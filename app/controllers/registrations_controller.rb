@@ -36,7 +36,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create_account
-    
+
   end
 
   def new_with_user
@@ -44,7 +44,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def new_with_organization
-    new()
+    puts "Hello Org"
+    #new()
   end
 
   def update

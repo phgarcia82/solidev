@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022171742) do
+ActiveRecord::Schema.define(version: 20141023010519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,8 +122,7 @@ ActiveRecord::Schema.define(version: 20141022171742) do
   add_index "memberships", ["user_id", "organization_id"], name: "index_memberships_on_user_id_and_organization_id", unique: true, using: :btree
 
   create_table "organizations", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "organisation_name"
     t.string   "addr_street"
     t.string   "addr_postcode"
     t.string   "addr_city"
@@ -139,6 +138,7 @@ ActiveRecord::Schema.define(version: 20141022171742) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "organisation_description"
   end
 
   create_table "proposals", force: true do |t|
