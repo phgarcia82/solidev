@@ -49,7 +49,6 @@ gem "autosize-rails"
 gem 'bootstrap-datepicker-rails'
 gem 'devise_invitable'
 gem 'rails-rateit'
-gem 'activeadmin', git: 'https://github.com/gregbell/active_admin.git'
 gem 'google-analytics-rails'
 gem 'will_paginate-bootstrap'
 gem 'high_voltage'
