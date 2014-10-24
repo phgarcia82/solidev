@@ -21,12 +21,13 @@ class User < ActiveRecord::Base
   #  :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :confirmable, :rememberable, :trackable, :validatable, :invitable
-  has_many :memberships, :conditions => {:validated => true}
-  has_many :assistances
-  has_many :organizations, :through => :memberships
+  #has_many :memberships, :conditions => {:validated => true}
+  #has_many :assistances
+  #has_many :organization, :through => :memberships
+  belongs_to :organization
   has_attached_file :id_card, :styles => { :medium => "500x500>", :thumb => "100x100>" }, :default_url => "/missing_id_card_:style.png"
   has_attached_file :avatar, :styles => { :medium => "500x500>", :thumb => "100x100>", :icon => "34x34", :navbar => "25x25" }, :default_url => "missing_avatar_:style.png"
-  accepts_nested_attributes_for :organizations
+  accepts_nested_attributes_for :organization
   #validates_date :date_of_birth, :before => Time.now
   validates_presence_of :username, :addr_city, :fullname
   before_create :set_admin_if_first

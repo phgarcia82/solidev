@@ -1,6 +1,6 @@
 <h2><%=t :sign_up %></h2><br />
 
-<%= bootstrap_horizontal_form_for resource, :url => registration_path(resource) do |f| %>
+<%= bootstrap_horizontal_form_for @user, :url => registration_path(@user) do |f| %>
   <%= devise_error_messages! %>
     <%= render 'shared/error_messages' %>
 
@@ -13,7 +13,7 @@
         <div class="col-sm-5">
             <legend><%=t :your_organization %></legend>
 
-          <%= f.fields_for "organization", resource.organizations.new do |o| %>
+          <%= f.fields_for "organization", Organization.new do |o| %>
                 <%= render :partial => "organization", :locals => { :f => o, :label_col => 4, :field_col => 8 } %>
             <% end %>
         </div>
@@ -26,4 +26,3 @@
     </div>
 
 <% end %>
-

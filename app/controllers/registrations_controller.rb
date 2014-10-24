@@ -21,19 +21,56 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     if verify_recaptcha
       # here we process two cases: organisation and personal account
-      if params[:user][:organization].blank?
+      if params[:user][:organization_attributes].blank?
         # personal account, nothing special here
+        super
       else
         # this is an organisation. then first we need to assign addr_city to user to come over the constraint
-      end
+        params.permit!
+        @organisation = Organization.new(organisation_params)
+        if @organisation.save
+          # get id, get city
+          @id = @organisation.id
+          @city = @organisation.addr_city
+          @sign_up_params = sign_up_params
+          @sign_up_params[:addr_city] = @city
+          @sign_up_params[:organisation_id] = @id
+          #re-assign
+          # devise process continues
+          build_resource(@sign_up_params)
+          if resource.save
+            yield resource if block_given?
+            if resource.active_for_authentication?
+              set_flash_message :notice, :signed_up if is_flashing_format?
+              sign_up(resource_name, resource)
+              respond_with resource, location: after_sign_up_path_for(resource)
+            else
+              set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+              expire_data_after_sign_in!
+              respond_with resource, location: after_inactive_sign_up_path_for(resource)
+            end
+          else
+            clean_up_passwords resource
+            respond_with resource
+          end
 
-      super
+          
+        end
+      end
     else
       build_resource(sign_up_params)
       clean_up_passwords(resource)
       flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
       flash.delete :recaptcha_error
-      render :new
+
+      if params[:user][:organization_attributes].blank?
+        # personal account, nothing special here
+        render :new
+      else
+        # this is an organisation. then first we need to assign addr_city to user to come over the constraint
+        render :new_with_organization
+      end
+
     end
   end
 
@@ -51,7 +88,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def new_with_organization
-    new()
+    @organisation = Organization.new
+    @user = User.new
+
   end
 
   def update
@@ -80,6 +119,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def organisation_params
-    params[:user][:organization]
+    params[:user][:organization_attributes]
   end
 end
