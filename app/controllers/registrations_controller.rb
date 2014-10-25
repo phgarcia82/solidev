@@ -36,7 +36,7 @@ class RegistrationsController < Devise::RegistrationsController
           @sign_up_params[:addr_city] = @city
           @sign_up_params[:organisation_id] = @id
           #re-assign
-          # devise process continues
+          # devise process continues - not using the super method here
           build_resource(@sign_up_params)
           if resource.save
             yield resource if block_given?
@@ -54,7 +54,7 @@ class RegistrationsController < Devise::RegistrationsController
             respond_with resource
           end
 
-          
+
         end
       end
     else

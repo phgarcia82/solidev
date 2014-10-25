@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= f.label :fullname, :col_sm => label_col %>
-  <%= f.text_field :fullname, :col_sm => field_col %>
+  <%= f.text_field :fullname, :col_sm => field_col, :id => 'txt_fullname' %>
 </div>
 
 <div class="form-group">
@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
   <%= f.label :username, :col_sm => label_col %>
-  <%= f.text_field :username, :col_sm => field_col %>
+  <%= f.text_field :username, :col_sm => field_col, :id => 'txt_username' %>
   <%= f.text_field :addr_city, :id => 'user_city', :style => "display:none", :value => "NaN " %>
 </div>
 <div class="form-group">
@@ -26,3 +26,15 @@
     <%= recaptcha_tags %>
   </div>
 </div>
+
+<script>
+    // When user choose a fullname, it will be automatically appoint as Username
+    var username = $('#txt_username');
+    var fullname = $('#txt_fullname');
+
+    $(document).ready(function() {
+        $('#txt_fullname').focusout(function() {
+            username.val(fullname.val());
+        });
+    });
+</script>
