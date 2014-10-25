@@ -1,4 +1,11 @@
 SolidareIt::Application.routes.draw do
+  get "message/index"
+  get "message/show"
+  get "message/new"
+  get "message/create"
+  get "message/edit"
+  get "message/update"
+  get "message/destroy"
   scope "(:locale)", locale: /en|fr|nl/ do
     get "devzone/index"
 
