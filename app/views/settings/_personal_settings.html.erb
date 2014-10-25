@@ -10,8 +10,54 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :email, :col_sm => label_col %>
+      <%= f.email_field :email, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, :col_sm => label_col %>
+      <%= f.password_field :password, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, :col_sm => label_col %>
+      <%= f.password_field :password_confirmation, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :username, :col_sm => label_col %>
+      <%= f.text_field :username, :col_sm => field_col, :id => 'txt_username' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :addr_street, :col_sm => label_col %>
+      <%= f.text_field :addr_street, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :addr_postcode, :col_sm => label_col %>
+      <%= f.text_field :addr_postcode, :col_sm => label_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :addr_city, :col_sm => label_col %>
+      <%= f.text_field :addr_city, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :country, :col_sm => label_col %>
+      <%= f.country_select :country, :col_sm => field_col %>
+    </div>
+    <div class="form-group">
+      <%= f.label :language_spoken, :col_sm => label_col %>
+      <div class="col-sm-<%= field_col %>">
+        <%= f.select :language_spoken, options_for_select([['English','en'],['French','fr'],['Dutch','nl']]),
+                     {}, {class: 'form-control'} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label 'Captcha', :col_sm => label_col %>
+      <div class="col-sm-<%= field_col%>">
+        <%= recaptcha_tags %>
+      </div>
+    </div>
+
+    <div class="form-group">
       <div class="col-sm-offset-2 col-sm-4">
-        <%= f.submit t :save_personal_settings %>
+        <%= f.submit t :btn_save %>
       </div>
     </div>
 <% end %>

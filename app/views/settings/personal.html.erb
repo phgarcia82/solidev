@@ -3,18 +3,25 @@
 <hr />
 
 <legend>Personal settings</legend>
-<%= render :partial => "personal_settings", :locals => { } %>
+<%= render :partial => "personal_settings", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>External email settings</legend>
+<%= render :partial => "external_email_settings", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>People following</legend>
+<%= render :partial => "people_following", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>Oragnisation following</legend>
+<%= render :partial => "organisation_following", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>Cirlces</legend>
+<%= render :partial => "circles", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>People blocked</legend>
+<%= render :partial => "people_blocked", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>Organisations blocked</legend>
+<%= render :partial => "organisation_blocked", :locals => { :label_col => 2, :field_col => 4 } %>
 
 <legend>Services blocked</legend>
+<%= render :partial => "services_blocked", :locals => { :label_col => 2, :field_col => 4 } %>

@@ -1,5 +1,12 @@
 SolidareIt::Application.routes.draw do
 
+  get "circles/index"
+  get "circles/show"
+  get "circles/create"
+  get "circles/update"
+  get "circles/delete"
+  get "circles/add_user"
+  get "circles/remove_user"
   get "settings/personal"
   get "settings/organisation"
   scope "(:locale)", locale: /en|fr|nl/ do
