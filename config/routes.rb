@@ -1,17 +1,10 @@
 SolidareIt::Application.routes.draw do
-
-  get "circles/index"
-  get "circles/show"
-  get "circles/create"
-  get "circles/update"
-  get "circles/delete"
-  get "circles/add_user"
-  get "circles/remove_user"
-  get "settings/personal"
-  get "settings/organisation"
   scope "(:locale)", locale: /en|fr|nl/ do
     get "devzone/index"
 
+
+    get "settings/personal"
+    get "settings/organisation"
 
     devise_for :users, :controllers => { :registrations => "registrations" }
     devise_scope :user do
@@ -32,6 +25,13 @@ SolidareIt::Application.routes.draw do
           end
         end
       end
+    end
+
+    post "circles/:circle_id/add_user", :to => "circles#add_user_process", :as => "circles_add_user_process"
+    delete "circles/show", :to => "circles#remove_user", :as => "circle_remove_user"
+    resources :circles do
+      get "add_user", :to => "circles#add_user", :as => "add_user"
+
     end
 
     resources :organizations do

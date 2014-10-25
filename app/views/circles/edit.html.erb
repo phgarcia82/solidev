@@ -1,0 +1,5 @@
+<h1>Edit circle name</h1>
+
+<%= bootstrap_horizontal_form_for @circles do |f| %>
+<%= render :partial => "form", :locals => { :f => f, :label_col => 2, :field_col => 3 } %>
+<% end %>

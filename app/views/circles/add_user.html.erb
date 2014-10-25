@@ -1,2 +1,4 @@
-<h1>Circles#add_user</h1>
-<p>Find me in app/views/circles/add_user.html.erb</p>
+<h1>Add user to circle</h1>
+<%= bootstrap_horizontal_form_for @user, :url => circles_add_user_process_path do |f| %>
+    <%= render :partial => "user", :locals => { :f => f, :label_col => 2, :field_col => 3 } %>
+<% end %>
