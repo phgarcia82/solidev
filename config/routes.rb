@@ -1,5 +1,7 @@
 SolidareIt::Application.routes.draw do
 
+  get "settings/personal"
+  get "settings/organisation"
   scope "(:locale)", locale: /en|fr|nl/ do
     get "devzone/index"
 

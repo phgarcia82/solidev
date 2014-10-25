@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :addr_city, :fullname
   before_create :set_admin_if_first
 
+  # after initialize, set default some values
+  after_initialize :init
+
 
   def full_name
     fullname
@@ -42,6 +45,14 @@ class User < ActiveRecord::Base
       username
     else
       fullname
+    end
+  end
+
+  def is_organisation_member
+    if self.organisation_id != -1
+      true
+    else
+      false
     end
   end
 
@@ -83,6 +94,10 @@ class User < ActiveRecord::Base
     end
 
     (@sum_proposal)+(@sum_exchange)
+  end
 
+  def init
+    # set organisation to -1 to make sure personal account always get a value in this field. Avoiding mix-type
+    self.organisation_id ||= -1
   end
 end

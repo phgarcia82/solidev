@@ -74,14 +74,14 @@ class ApplicationController < ActionController::Base
 
   def load_menu
     if user_signed_in?
-      @menu_organizations = current_user.organizations.to_a
+      @menu_organizations = current_user.organization.to_a
       recognized_path = Rails.application.routes.recognize_path(request.env['PATH_INFO'])
       organization = false
 
       if recognized_path[:controller] == "organizations" && !recognized_path[:id].nil?
-        organization =  current_user.organizations.find_by_id(params[:id])
+        organization =  current_user.organization.find_by_id(params[:id])
       elsif !recognized_path[:organization_id].nil?
-        organization =  current_user.organizations.find_by_id(params[:organization_id])
+        organization =  current_user.organization.find_by_id(params[:organization_id])
       end
 
       if organization

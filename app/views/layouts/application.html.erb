@@ -47,9 +47,15 @@
                                 <%= current_user.fullname %><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                               <li><%= link_to t(:my_profil), current_user %></li>
-
+                              <li>
+                                <% if current_user.is_organisation_member %>
+                                    <%= link_to t(:my_settings), settings_organisation_path %>
+                                <% else %>
+                                    <%= link_to t(:my_settings), settings_personal_path %>
+                                <% end %>
+                              </li>
                               <li><%= link_to t(:edit_account), edit_user_registration_path %></li>
-                                <li><%= link_to t(:sign_out), destroy_user_session_path, :method => "delete" %></li>
+                              <li><%= link_to t(:sign_out), destroy_user_session_path, :method => "delete" %></li>
                             </ul>
                         </li>
                     <% else %>

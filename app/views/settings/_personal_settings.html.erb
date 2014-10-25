@@ -1,0 +1,17 @@
+<%= bootstrap_horizontal_form_for(@user) do |f| %>
+    <div class="form-group">
+      <%= f.label :avatar_file_name, :col_sm => label_col %>
+      <%= f.file_field :avatar_file_name, :title => t(:browse), :class => "btn-primary" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fullname, :col_sm => label_col %>
+      <%= f.text_field :fullname, :col_sm => field_col %>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <%= f.submit t :save_personal_settings %>
+      </div>
+    </div>
+<% end %>
